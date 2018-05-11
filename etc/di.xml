@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Eadesigndev\RomCity\Api\Quote\Data\EstimateAddressInterface"
+                type="Eadesigndev\RomCity\Model\Quote\EstimateAddress"/>
+
+    <preference for="Eadesigndev\RomCity\Api\Quote\GuestShippingMethodManagementInterface"
+                type="Eadesigndev\RomCity\Model\Quote\GuestCart\GuestShippingMethodManagement"/>
+
+    <preference for="Eadesigndev\RomCity\Api\Quote\ShippingMethodManagementInterface"
+                type="Eadesigndev\RomCity\Model\Quote\ShippingMethodManagement"/>
+
+    <preference for="Magento\Quote\Model\Cart\CartTotalManagement"
+                type="ShopGo\CheckoutCity\Model\Quote\Cart\CartTotalManagement"/>
+</config>
