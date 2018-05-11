@@ -6,12 +6,13 @@
 namespace Eadesigndev\RomCity\Api\Quote;
 
 use Eadesigndev\RomCity\Api\Quote\Data\EstimateAddressInterface;
+use Magento\Quote\Api\GuestShippingMethodManagementInterface as MagentoGuestShippingMethodManagementInterface;
 
 /**
  * Shipping method management interface for guest carts.
  * @api
  */
-interface GuestShippingMethodManagementInterface extends \Magento\Quote\Api\GuestShippingMethodManagementInterface
+interface GuestShippingMethodManagementInterface extends MagentoGuestShippingMethodManagementInterface
 {
     /**
      * Estimate shipping

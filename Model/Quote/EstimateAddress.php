@@ -6,8 +6,9 @@
 namespace Eadesigndev\RomCity\Model\Quote;
 
 use Eadesigndev\RomCity\Api\Quote\Data\EstimateAddressInterface;
+use Magento\Quote\Model\EstimateAddress as MagentoEstimateAddress;
 
-class EstimateAddress extends \Magento\Quote\Model\EstimateAddress implements EstimateAddressInterface
+class EstimateAddress extends MagentoEstimateAddress implements EstimateAddressInterface
 {
     /**
      * Get city

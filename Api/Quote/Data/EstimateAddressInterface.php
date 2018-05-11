@@ -5,11 +5,13 @@
  */
 namespace Eadesigndev\RomCity\Api\Quote\Data;
 
+use Magento\Quote\Api\Data\EstimateAddressInterface as MagentoDataEstimateAddressInterface;
+
 /**
  * Interface EstimateAddressInterface
  * @api
  */
-interface EstimateAddressInterface extends \Magento\Quote\Api\Data\EstimateAddressInterface
+interface EstimateAddressInterface extends MagentoDataEstimateAddressInterface
 {
     /**#@+
      * Constants defined for keys of array, makes typos less likely
