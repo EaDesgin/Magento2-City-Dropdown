@@ -13,5 +13,5 @@
                 type="Eadesigndev\RomCity\Model\Quote\ShippingMethodManagement"/>
 
     <preference for="Magento\Quote\Model\Cart\CartTotalManagement"
-                type="ShopGo\CheckoutCity\Model\Quote\Cart\CartTotalManagement"/>
+                type="Eadesigndev\RomCity\Model\Quote\Cart\CartTotalManagement"/>
 </config>
