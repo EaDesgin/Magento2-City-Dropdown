@@ -14,4 +14,29 @@
 
     <preference for="Magento\Quote\Model\Cart\CartTotalManagement"
                 type="Eadesigndev\RomCity\Model\Quote\Cart\CartTotalManagement"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="city_data_source" xsi:type="string">Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">eadesign_romcity</argument>
+            <argument name="eventPrefix" xsi:type="string">fields_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">fields_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Eadesigndev\RomCity\Model\ResourceModel\RomCity</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="FieldsGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">TemplatesGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
 </config>
