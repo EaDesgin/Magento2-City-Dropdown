@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ea_romcity" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>RomCity</label>
+            <tab>eadesign_extensions</tab>
+            <resource>Eadesigndev_RomCity::configuration</resource>
+            <group id="romcity" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>RomCity</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment>If enabled, RomCity will be customized by your settings made at "Manage City List".
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
