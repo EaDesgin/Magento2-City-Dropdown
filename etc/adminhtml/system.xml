@@ -18,6 +18,19 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
+            <group id="custom_group" translate="label" type="text" sortOrder="151" showInDefault="1" showInWebsite="1">
+                <label>Upload City</label>
+                <field id="city_file_upload" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File"
+                       sortOrder="6" showInDefault="1" showInWebsite="1">
+                    <label>Upload city file</label>
+                    <backend_model>Eadesigndev\RomCity\Model\Config\Backend\UploadFile</backend_model>
+                    <upload_dir config="system" scope_info="1">test</upload_dir>
+                </field>
+                <field id="update_city" translate="label comment tooltip" type="button" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <frontend_model>Eadesigndev\RomCity\Block\Adminhtml\System\Config\Button</frontend_model>
+                </field>
+            </group>
         </section>
     </system>
 </config>
