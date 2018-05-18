@@ -1,0 +1,13 @@
+<?php
+/** @var $block \Eadesigndev\RomCity\Block\Adminhtml\System\Config\Button */
+?>
+
+<div class="pp-buttons-container">
+    <p>
+        <button id="<?php echo $block->getHtmlId() ?>"
+                onclick="setLocation('<?php /* @escapeNotVerified */ echo $block->getSendUrl() ?>')"
+                type="button">
+            <?php /* @escapeNotVerified */ echo __('Update City') ?>
+        </button>
+    </p>
+</div>
