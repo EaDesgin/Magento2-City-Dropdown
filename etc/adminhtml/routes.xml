@@ -5,5 +5,8 @@
         <route id="manage_romcity" frontName="manage_romcity">
             <module name="Eadesigndev_RomCity" before="Magento_Backend"/>
         </route>
+        <route id="upload_city" frontName="upload_city">
+            <module name="Eadesigndev_RomCity" before="Magento_Backend"/>
+        </route>
     </router>
 </config>

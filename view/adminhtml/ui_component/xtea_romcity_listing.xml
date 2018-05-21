@@ -7,6 +7,14 @@
             <item name="deps" xsi:type="string">xtea_romcity_listing.city_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">fields_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Upload City</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/upload</item>
+            </item>
+        </item>
     </argument>
     <dataSource name="city_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
