@@ -1,7 +1,17 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Eadesigndev_RomCity::romcity" title="RomCity" module="Eadesigndev_RomCity" sortOrder="10" resource="Eadesigndev_RomCity::romcity" parent="Eadesigndev_Eacore::eadesign"/>
-        <add id="Eadesigndev_RomCity::romcity_list" title="Manage City List" module="Eadesigndev_RomCity" sortOrder="10" parent="Eadesigndev_RomCity::romcity" action="manage_romcity/index" resource="Eadesigndev_RomCity::romcity"/>
+        <add id="Eadesigndev_RomCity::romcity" title="RomCity" module="Eadesigndev_RomCity" sortOrder="10"
+             resource="Eadesigndev_RomCity::romcity" parent="Eadesigndev_Eacore::eadesign"/>
+
+        <add id="Eadesigndev_RomCity::romcity_list" title="Manage City List" module="Eadesigndev_RomCity" sortOrder="10"
+             parent="Eadesigndev_RomCity::romcity" action="manage_romcity/index"
+             resource="Eadesigndev_RomCity::romcity"/>
+
+        <add id="Eadesigndev_RomCity::region_list" title="Manage Region List" module="Eadesigndev_RomCity" sortOrder="20"
+             parent="Eadesigndev_RomCity::romcity" action="manage_romcity/region"
+             resource="Eadesigndev_RomCity::romcity"/>
+
     </menu>
 </config>

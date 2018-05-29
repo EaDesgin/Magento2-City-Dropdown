@@ -23,6 +23,14 @@
         </arguments>
     </type>
 
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="region_data_source" xsi:type="string">Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
     <type name="Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection">
         <arguments>
             <argument name="mainTable" xsi:type="string">eadesign_romcity</argument>
