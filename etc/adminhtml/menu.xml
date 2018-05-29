@@ -10,7 +10,7 @@
              resource="Eadesigndev_RomCity::romcity"/>
 
         <add id="Eadesigndev_RomCity::region_list" title="Manage Region List" module="Eadesigndev_RomCity" sortOrder="20"
-             parent="Eadesigndev_RomCity::romcity" action="manage_romcity/region"
+             parent="Eadesigndev_RomCity::romcity" action="manage_romcity/index/region"
              resource="Eadesigndev_RomCity::romcity"/>
 
     </menu>
