@@ -8,8 +8,9 @@ namespace Eadesigndev\RomCity\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
+use Magento\Backend\App\Action;
 
-class Index extends \Magento\Backend\App\Action
+class Index extends Action
 {
     /**
      * Authorization level of a basic admin session
@@ -18,7 +19,7 @@ class Index extends \Magento\Backend\App\Action
      */
     const ADMIN_RESOURCE = 'Eadesigndev_RomCity::romcity';
 
-    protected $resultPageFactory;
+    private $resultPageFactory;
 
     public function __construct(
         Context $context,
@@ -37,8 +38,8 @@ class Index extends \Magento\Backend\App\Action
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->addBreadcrumb(__('RomCity List'), __('Manage City List'));
-        $resultPage->getConfig()->getTitle()->prepend(__('RomCity List'));
+        $resultPage->addBreadcrumb(__('City List'), __('Manage City List'));
+        $resultPage->getConfig()->getTitle()->prepend(__('City List'));
 
         return $resultPage;
     }
