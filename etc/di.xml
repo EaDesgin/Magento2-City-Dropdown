@@ -18,7 +18,9 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="city_data_source" xsi:type="string">Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection</item>
+                <item name="city_data_source" xsi:type="string">
+                    Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection
+                </item>
             </argument>
         </arguments>
     </type>
@@ -26,7 +28,9 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="region_data_source" xsi:type="string">Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection</item>
+                <item name="xtea_region_listing_data_source" xsi:type="string">
+                    Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection
+                </item>
             </argument>
         </arguments>
     </type>
@@ -40,10 +44,21 @@
         </arguments>
     </type>
 
-    <virtualType name="FieldsGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+    <virtualType name="FieldsGridDataProvider"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
         <arguments>
-            <argument name="collection" xsi:type="object" shared="false">Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection</argument>
+            <argument name="collection" xsi:type="object" shared="false">
+                Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection
+            </argument>
             <argument name="filterPool" xsi:type="object" shared="false">TemplatesGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">directory_country_region</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Directory\Model\ResourceModel\Region</argument>
         </arguments>
     </virtualType>
 
