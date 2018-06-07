@@ -13,6 +13,5 @@
         <route id="region_list" frontName="region_list">
             <module name="Eadesigndev_RomCity" before="Magento_Backend"/>
         </route>
-
     </router>
 </config>
