@@ -10,7 +10,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Backend\App\Action;
 
-class Index extends Action
+class Region extends Action
 {
     /**
      * Authorization level of a basic admin session
@@ -19,7 +19,7 @@ class Index extends Action
      */
     const ADMIN_RESOURCE = 'Eadesigndev_RomCity::romcity';
 
-    private $resultPageFactory;
+    protected $resultPageFactory;
 
     public function __construct(
         Context $context,
@@ -38,8 +38,8 @@ class Index extends Action
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->addBreadcrumb(__('City List'), __('Manage City List'));
-        $resultPage->getConfig()->getTitle()->prepend(__('City List'));
+        $resultPage->addBreadcrumb(__('Region List'), __('Manage Region List'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Region List'));
 
         return $resultPage;
     }
