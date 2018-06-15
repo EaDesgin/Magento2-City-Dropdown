@@ -19,7 +19,7 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="city_data_source" xsi:type="string">
-                    Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection
+                    Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\Collection
                 </item>
             </argument>
         </arguments>
@@ -35,7 +35,7 @@
         </arguments>
     </type>
 
-    <type name="Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection">
+    <type name="Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\Collection">
         <arguments>
             <argument name="mainTable" xsi:type="string">eadesign_romcity</argument>
             <argument name="eventPrefix" xsi:type="string">fields_grid_collection</argument>
