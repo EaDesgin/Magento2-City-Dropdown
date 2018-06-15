@@ -14,14 +14,9 @@ define(['jquery'], function ($) {
                 });
             });
 
-            observableFields.push('country_id'); // Load shipping method on Country chnage
             observableFields.push('city'); // Load shipping method on Postcode chnage
-            //observableFields.push('telephone'); // Load shipping method on Phone Number chnage
-            //observableFields.push('city'); // Load shipping method on City chnage
-
-
             return observableFields;
-        }
+        };
 
         return targetFunction;
     };
