@@ -6,9 +6,9 @@
 
 namespace Eadesigndev\RomCity\Model;
 
-use Eadesigndev\RomCity\Api\Quote\Data\RomCityInterface;
+use Eadesigndev\RomCity\Api\Data\RomCityInterface;
 use Eadesigndev\RomCity\Model\ResourceModel\RomCity as RomCityResourceModel;
-use Eadesigndev\RomCity\Api\Quote\RomCityRepositoryInterface;
+use Eadesigndev\RomCity\Api\RomCityRepositoryInterface;
 use Magento\Framework\Exception\LocalizedException as Exception;
 use Magento\Framework\Message\ManagerInterface;
 

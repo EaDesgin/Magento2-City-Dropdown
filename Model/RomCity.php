@@ -6,7 +6,7 @@
 
 namespace Eadesigndev\RomCity\Model;
 
-use Eadesigndev\RomCity\Api\Quote\Data\RomCityInterface;
+use Eadesigndev\RomCity\Api\Data\RomCityInterface;
 use Eadesigndev\RomCity\Model\ResourceModel\RomCity as RomCityResourceModel;
 use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Model\AbstractModel;

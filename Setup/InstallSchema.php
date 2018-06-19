@@ -6,7 +6,7 @@
 
 namespace Eadesigndev\RomCity\Setup;
 
-use Eadesigndev\RomCity\Api\Quote\Data\RomCityInterface;
+use Eadesigndev\RomCity\Api\Data\RomCityInterface;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
