@@ -24,7 +24,7 @@
                        sortOrder="6" showInDefault="1" showInWebsite="1">
                     <label>Upload city file</label>
                     <backend_model>Eadesigndev\RomCity\Model\Config\Backend\UploadFile</backend_model>
-                    <upload_dir config="system" scope_info="1">test</upload_dir>
+                    <upload_dir config="system" scope_info="0">test</upload_dir>
                 </field>
                 <field id="update_city" translate="label comment tooltip" type="button" sortOrder="20" showInDefault="1"
                        showInWebsite="1" showInStore="0">

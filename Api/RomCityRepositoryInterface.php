@@ -4,9 +4,9 @@
  * See LICENSE for license details.
  */
 
-namespace Eadesigndev\RomCity\Api\Quote;
+namespace Eadesigndev\RomCity\Api;
 
-use Eadesigndev\RomCity\Api\Quote\Data\RomCityInterface;
+use Eadesigndev\RomCity\Api\Data\RomCityInterface;
 
 interface RomCityRepositoryInterface
 {

@@ -6,7 +6,7 @@
 
 namespace Eadesigndev\RomCity\Model;
 
-use Eadesigndev\RomCity\Api\Quote\Data\RomCityInterface;
+use Eadesigndev\RomCity\Api\Data\RomCityInterface;
 use Magento\Framework\ObjectManagerInterface;
 
 class RomCityFactory implements RomCityFactoryInterface

@@ -4,7 +4,7 @@
  * See LICENSE for license details.
  */
 
-namespace Eadesigndev\RomCity\Api\Quote\Data;
+namespace Eadesigndev\RomCity\Api\Data;
 
 interface RomCityInterface
 {
