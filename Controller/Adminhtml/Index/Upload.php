@@ -7,6 +7,9 @@
 namespace Eadesigndev\RomCity\Controller\Adminhtml\Index;
 
 use Eadesigndev\RomCity\Helper\Data;
+use Eadesigndev\RomCity\Model\RomCityFactory;
+use Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\Collection;
+use Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\CollectionFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Backend\App\Action;
@@ -33,6 +36,9 @@ class Upload extends Action
 
     private $dataHelper;
 
+    private $collectionFactory;
+
+    private $romCityFactory;
 
     public function __construct(
         Context $context,
@@ -40,8 +46,12 @@ class Upload extends Action
         Reader $moduleReader,
         PageFactory $resultPageFactory,
         DirectoryList $directoryList,
+        CollectionFactory $collectionFactory,
+        RomCityFactory $romCityFactory,
         Data $dataHelper
     ) {
+        $this->romCityFactory = $romCityFactory;
+        $this->collectionFactory = $collectionFactory;
         $this->dataHelper    = $dataHelper;
         $this->directoryList = $directoryList;
         $this->moduleReader  = $moduleReader;
@@ -71,19 +81,58 @@ class Upload extends Action
     public function readCsv()
     {
         $pubMediaDir = $this->directoryList->getPath(DirectoryList::MEDIA);
-        $fieName     = $this->dataHelper->getConfigFileName();
-        $ds          = DIRECTORY_SEPARATOR;
-        $dirTest     = '/test';
+        $fieName = $this->dataHelper->getConfigFileName();
+        $ds = DIRECTORY_SEPARATOR;
+        $dirTest = '/test';
 
         $file = $pubMediaDir . $dirTest . $ds . $fieName;
 
-        if (file_exists($file)) {
-            $data = $this->csvProccesor->getData($file);
-            // This skips the first line of your csv file, since it will probably be a heading. Set $i = 0 to not skip the first line.
-            for ($i = 1; $i < count($data); $i++) {
-                var_dump($data[$i]); // $data[$i] is an array with your csv columns as values.
+        /** @var Collection $collection */
+        $collection = $this->collectionFactory->create();
+
+        if (!empty($file)) {
+            $csvData = $this->csvProccesor->getData($file);
+
+            $csvDataProcessed = [];
+            array_pop($csvData);
+
+            foreach ($csvData as $csvValue) {
+                $csvValueProcessed = [];
+                foreach ($csvValue as $key => $value) {
+                    if ($key == 0) {
+                        $csvValueProcessed['entity_id'] = $value;
+                    }
+
+                    if ($key == 1) {
+                        $csvValueProcessed['region_id'] = $value;
+                    }
+
+                    if ($key == 2) {
+                        $csvValueProcessed['city_id'] = $value;
+                    }
+
+                    if ($key == 3) {
+                        $csvValueProcessed['city'] = $value;
+                    }
+                }
+                $csvDataProcessed[] = $csvValueProcessed;
+            }
+
+            foreach ($csvDataProcessed as $rowIndex => $dataRow) {
+                if ($rowIndex > 0) {
+                    $regionId = $dataRow['region_id'];
+                    $cityName = $dataRow['city'];
+
+                    $romCityFactory = $this->romCityFactory->create();
+                    $romCityFactory->setRegionId($regionId);
+                    $romCityFactory->setCityName($cityName);
+
+                    $collection->addItem($romCityFactory);
+                    continue;
+                }
             }
         }
+        $collection->walk('save');
     }
 
     /**
