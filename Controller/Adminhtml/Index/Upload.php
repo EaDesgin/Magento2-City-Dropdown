@@ -117,19 +117,22 @@ class Upload extends Action
                 $csvDataProcessed[] = $csvValueProcessed;
             }
 
-            foreach ($csvDataProcessed as $rowIndex => $dataRow) {
-                if ($rowIndex > 0) {
-                    $regionId = $dataRow['region_id'];
-                    $cityName = $dataRow['city'];
+            foreach ($csvDataProcessed as $dataRow) {
+                $regionId = $dataRow['region_id'];
+                $cityName = $dataRow['city'];
+                $entityId = $dataRow['entity_id'];
 
-                    $romCityFactory = $this->romCityFactory->create();
-                    $romCityFactory->setRegionId($regionId);
-                    $romCityFactory->setCityName($cityName);
-
-                    $collection->addItem($romCityFactory);
+                $romCityFactory = $this->romCityFactory->create();
+                if (isset($entityId) && is_numeric($entityId)) {
+                    $romCityFactory->setId($entityId);
                 }
+                $romCityFactory->setRegionId($regionId);
+                $romCityFactory->setCityName($cityName);
+
+                $collection->addItem($romCityFactory);
             }
         }
+
         $collection->walk('save');
     }
 
