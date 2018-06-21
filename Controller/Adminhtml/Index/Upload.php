@@ -72,8 +72,7 @@ class Upload extends Action
         $resultPage->addBreadcrumb(__('Upload City'), __('Manage Upload City List'));
         $resultPage->getConfig()->getTitle()->prepend(__('Upload City'));
 
-        $test = $this->readCsv();
-        $test;
+        $this->readCsv();
 
         return $resultPage;
     }
@@ -87,14 +86,14 @@ class Upload extends Action
 
         $file = $pubMediaDir . $dirTest . $ds . $fieName;
 
-        /** @var Collection $collection */
-        $collection = $this->collectionFactory->create();
-
         if (!empty($file)) {
             $csvData = $this->csvProccesor->getData($file);
 
             $csvDataProcessed = [];
-            array_pop($csvData);
+            unset($csvData[0]);
+
+            /** @var Collection $collection */
+            $collection = $this->collectionFactory->create();
 
             foreach ($csvData as $csvValue) {
                 $csvValueProcessed = [];
@@ -128,7 +127,6 @@ class Upload extends Action
                     $romCityFactory->setCityName($cityName);
 
                     $collection->addItem($romCityFactory);
-                    continue;
                 }
             }
         }
