@@ -292,7 +292,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">textRange</item>
-                    <item name="label" xsi:type="string" translate="true">ID</item>
+                    <item name="label" xsi:type="string" translate="true">City ID</item>
                 </item>
             </argument>
         </column>
@@ -306,20 +306,11 @@
             </argument>
         </column>
 
-        <column name="city_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">textRange</item>
-                    <item name="label" xsi:type="string" translate="true">City Id</item>
-                </item>
-            </argument>
-        </column>
-
         <column name="city">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">textRange</item>
-                    <item name="label" xsi:type="string" translate="true">City</item>
+                    <item name="label" xsi:type="string" translate="true">City Name</item>
                 </item>
             </argument>
         </column>

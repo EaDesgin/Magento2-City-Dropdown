@@ -115,10 +115,6 @@ class Upload extends Action
                     }
 
                     if ($key == 2) {
-                        $csvValueProcessed['city_id'] = $value;
-                    }
-
-                    if ($key == 3) {
                         $csvValueProcessed['city'] = $value;
                     }
                 }
