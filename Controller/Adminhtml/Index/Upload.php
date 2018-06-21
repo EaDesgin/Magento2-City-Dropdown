@@ -12,6 +12,7 @@ use Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\Collection;
 use Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\CollectionFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action;
 use Magento\Framework\File\Csv;
 use Magento\Framework\Module\Dir\Reader;
@@ -40,6 +41,8 @@ class Upload extends Action
 
     private $romCityFactory;
 
+    private $resultRedirect;
+
     public function __construct(
         Context $context,
         Csv $csvProccesor,
@@ -47,34 +50,34 @@ class Upload extends Action
         PageFactory $resultPageFactory,
         DirectoryList $directoryList,
         CollectionFactory $collectionFactory,
+        ResultFactory $resultRedirect,
         RomCityFactory $romCityFactory,
         Data $dataHelper
     ) {
-        $this->romCityFactory = $romCityFactory;
+        $this->resultRedirect    = $resultRedirect;
+        $this->romCityFactory    = $romCityFactory;
         $this->collectionFactory = $collectionFactory;
-        $this->dataHelper    = $dataHelper;
-        $this->directoryList = $directoryList;
-        $this->moduleReader  = $moduleReader;
-        $this->csvProccesor  = $csvProccesor;
+        $this->dataHelper        = $dataHelper;
+        $this->directoryList     = $directoryList;
+        $this->moduleReader      = $moduleReader;
+        $this->csvProccesor      = $csvProccesor;
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
 
     /**
      * Index action list city.
-     *
-     * @return \Magento\Backend\Model\View\Result\Page
+     * @return $resultRedirect
      */
     public function execute()
     {
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->addBreadcrumb(__('Upload City'), __('Manage Upload City List'));
-        $resultPage->getConfig()->getTitle()->prepend(__('Upload City'));
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $url = $this->_redirect->getRefererUrl();
+        $resultRedirect->setUrl($url);
 
         $this->readCsv();
 
-        return $resultPage;
+        return $resultRedirect;
     }
 
     public function readCsv()
@@ -132,7 +135,6 @@ class Upload extends Action
                 $collection->addItem($romCityFactory);
             }
         }
-
         $collection->walk('save');
     }
 
