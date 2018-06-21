@@ -15,6 +15,9 @@
     <preference for="Magento\Quote\Model\Cart\CartTotalManagement"
                 type="Eadesigndev\RomCity\Model\Quote\Cart\CartTotalManagement"/>
 
+    <preference for="Eadesigndev\RomCity\Api\Data\RomCityInterface"
+                type="Eadesigndev\RomCity\Model\RomCity"/>
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
