@@ -7,11 +7,13 @@
 namespace Eadesigndev\RomCity\Controller\Adminhtml\Index;
 
 use Eadesigndev\RomCity\Helper\Data;
+use Eadesigndev\RomCity\Model\RomCityRepository;
 use Eadesigndev\RomCity\Model\RomCityFactory;
-use Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\Collection;
-use Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\CollectionFactory;
+use Eadesigndev\RomCity\Model\ResourceModel\Collection\Collection;
+use Eadesigndev\RomCity\Model\ResourceModel\Collection\CollectionFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action;
 use Magento\Framework\File\Csv;
 use Magento\Framework\Module\Dir\Reader;
@@ -40,6 +42,10 @@ class Upload extends Action
 
     private $romCityFactory;
 
+    private $resultRedirect;
+
+    private $romCityRepository;
+
     public function __construct(
         Context $context,
         Csv $csvProccesor,
@@ -47,34 +53,36 @@ class Upload extends Action
         PageFactory $resultPageFactory,
         DirectoryList $directoryList,
         CollectionFactory $collectionFactory,
+        ResultFactory $resultRedirect,
         RomCityFactory $romCityFactory,
+        RomCityRepository $romCityRepository,
         Data $dataHelper
     ) {
-        $this->romCityFactory = $romCityFactory;
+        $this->romCityRepository = $romCityRepository;
+        $this->resultRedirect    = $resultRedirect;
+        $this->romCityFactory    = $romCityFactory;
         $this->collectionFactory = $collectionFactory;
-        $this->dataHelper    = $dataHelper;
-        $this->directoryList = $directoryList;
-        $this->moduleReader  = $moduleReader;
-        $this->csvProccesor  = $csvProccesor;
+        $this->dataHelper        = $dataHelper;
+        $this->directoryList     = $directoryList;
+        $this->moduleReader      = $moduleReader;
+        $this->csvProccesor      = $csvProccesor;
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
 
     /**
      * Index action list city.
-     *
-     * @return \Magento\Backend\Model\View\Result\Page
+     * @return $resultRedirect
      */
     public function execute()
     {
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->addBreadcrumb(__('Upload City'), __('Manage Upload City List'));
-        $resultPage->getConfig()->getTitle()->prepend(__('Upload City'));
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $url = $this->_redirect->getRefererUrl();
+        $resultRedirect->setUrl($url);
 
         $this->readCsv();
 
-        return $resultPage;
+        return $resultRedirect;
     }
 
     public function readCsv()
@@ -92,7 +100,7 @@ class Upload extends Action
             $csvDataProcessed = [];
             unset($csvData[0]);
 
-            /** @var Collection $collection */
+            /** @var  Collection $collection */
             $collection = $this->collectionFactory->create();
 
             foreach ($csvData as $csvValue) {
@@ -107,10 +115,6 @@ class Upload extends Action
                     }
 
                     if ($key == 2) {
-                        $csvValueProcessed['city_id'] = $value;
-                    }
-
-                    if ($key == 3) {
                         $csvValueProcessed['city'] = $value;
                     }
                 }
@@ -124,7 +128,7 @@ class Upload extends Action
 
                 $romCityFactory = $this->romCityFactory->create();
                 if (isset($entityId) && is_numeric($entityId)) {
-                    $romCityFactory->setId($entityId);
+                    $romCityFactory = $this->romCityRepository->getById($entityId);
                 }
                 $romCityFactory->setRegionId($regionId);
                 $romCityFactory->setCityName($cityName);
@@ -132,7 +136,6 @@ class Upload extends Action
                 $collection->addItem($romCityFactory);
             }
         }
-
         $collection->walk('save');
     }
 

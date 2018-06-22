@@ -28,6 +28,15 @@
         </arguments>
     </type>
 
+    <type name="Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">eadesign_romcity</argument>
+            <argument name="eventPrefix" xsi:type="string">fields_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">fields_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Eadesigndev\RomCity\Model\ResourceModel\RomCity</argument>
+        </arguments>
+    </type>
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -38,14 +47,13 @@
         </arguments>
     </type>
 
-    <type name="Eadesigndev\RomCity\Model\ResourceModel\Collection\City\Grid\Collection">
+    <virtualType name="Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">eadesign_romcity</argument>
-            <argument name="eventPrefix" xsi:type="string">fields_grid_collection</argument>
-            <argument name="eventObject" xsi:type="string">fields_grid_collection</argument>
-            <argument name="resourceModel" xsi:type="string">Eadesigndev\RomCity\Model\ResourceModel\RomCity</argument>
+            <argument name="mainTable" xsi:type="string">directory_country_region</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Directory\Model\ResourceModel\Region</argument>
         </arguments>
-    </type>
+    </virtualType>
 
     <virtualType name="FieldsGridDataProvider"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
@@ -56,13 +64,4 @@
             <argument name="filterPool" xsi:type="object" shared="false">TemplatesGirdFilterPool</argument>
         </arguments>
     </virtualType>
-
-    <virtualType name="Eadesigndev\RomCity\Model\ResourceModel\Collection\Grid\Collection"
-                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
-        <arguments>
-            <argument name="mainTable" xsi:type="string">directory_country_region</argument>
-            <argument name="resourceModel" xsi:type="string">Magento\Directory\Model\ResourceModel\Region</argument>
-        </arguments>
-    </virtualType>
-
 </config>

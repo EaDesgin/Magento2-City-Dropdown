@@ -38,7 +38,7 @@ class InstallSchema implements InstallSchemaInterface
                 Table::TYPE_SMALLINT,
                 null,
                 ['identity' => true, 'nullable' => false, 'primary' => true],
-                'Entity Id'
+                'City Id'
             )->addColumn(
                 RomCityInterface::REGION_ID,
                 Table::TYPE_TEXT,
@@ -46,17 +46,11 @@ class InstallSchema implements InstallSchemaInterface
                 ['nullable' => false],
                 'Region Id'
             )->addColumn(
-                RomCityInterface::CITY_ID,
-                Table::TYPE_TEXT,
-                255,
-                ['nullable' => false],
-                'City Id'
-            )->addColumn(
                 RomCityInterface::CITY_NAME,
                 Table::TYPE_TEXT,
                 255,
                 ['nullable' => false],
-                'City'
+                'City Name'
             );
             $setup->getConnection()->createTable($table);
         }

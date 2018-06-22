@@ -47,11 +47,6 @@ class RomCity extends AbstractModel implements RomCityInterface
         return $this->getData(RomCityInterface::REGION_ID);
     }
 
-    public function getCityId()
-    {
-        return $this->getData(RomCityInterface::CITY_ID);
-    }
-
     public function getCityName()
     {
         return $this->getData(RomCityInterface::CITY_NAME);
@@ -66,11 +61,6 @@ class RomCity extends AbstractModel implements RomCityInterface
     public function setRegionId($regionId)
     {
         $this->setData(RomCityInterface::REGION_ID, $regionId);
-    }
-
-    public function setCityId($cityId)
-    {
-        $this->setData(RomCityInterface::CITY_ID, $cityId);
     }
 
     public function setCityName($cityName)
