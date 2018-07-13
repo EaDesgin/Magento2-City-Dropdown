@@ -13,62 +13,72 @@ define([
         options: {
             cityTemplate:
             '<select>' + '<option>' + '1' + '</option>' + '<option>' + '2' + '</option>' + '</select>'
-        },
+        }
     });
     return function () {
 
 
-        var directoryData = '{\n' +
-            '  "RO": {\n' +
-            '    "name": "Romania",\n' +
-            '    "regions": {\n' +
-            '      "278": {\n' +
-            '        "code": "AB",\n' +
-            '        "name": "Alba",\n' +
-            '        "cities": {\n' +
-            '          "1": {\n' +
-            '            "name":"Aiud",\n' +
-            '            "id" : "1"\n' +
-            '          },\n' +
-            '          "2": {\n' +
-            '            "name":"Abrud",\n' +
-            '            "id" : "2"\n' +
-            '          }\n' +
-            '        }\n' +
-            '      },\n' +
-            '      "279": {\n' +
-            '        "code": "AR",\n' +
-            '        "name": "Arad",\n' +
-            '        "cities": {\n' +
-            '          "1": {\n' +
-            '            "name":"Arad",\n' +
-            '            "id" : "3"\n' +
-            '          },\n' +
-            '          "2": {\n' +
-            '            "name":"Baia",\n' +
-            '            "id" : "4"\n' +
-            '          }\n' +
-            '        }\n' +
-            '      }\n' +
-            '    }\n' +
-            '  }\n' +
-            '}',
-            obj = JSON.parse(directoryData);
+        var directoryData = {
+            "RO": [
+                {
+                    "name": "Romania",
+                    "regions": {
+                        "278": {
+                            "code": "AB",
+                            "name": "Alba",
+                            "cities": {
+                                "1": {
+                                    "name": "Aiud",
+                                    "id": "1"
+                                },
+                                "2": {
+                                    "name": "Abrud",
+                                    "id": "2"
+                                }
+                            }
+                        },
+                        "279": {
+                            "code": "AR",
+                            "name": "Arad",
+                            "cities": {
+                                "1": {
+                                    "name": "Arad",
+                                    "id": "3"
+                                },
+                                "2": {
+                                    "name": "Baia",
+                                    "id": "4"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        var string = JSON.stringify(directoryData);
 
+        console.log(string);
+
+        var obj = JSON.parse(string);
 
         $(document).on('change', "[name='country_id']", function () {
         });
 
         $(document).on('change', "[name='region_id']", function () {
-            console.log('test');
 
-            var region_id = $(this).val(),
-                region = obj.RO.regions[region_id];
-            console.log(region);
+            var region_option = $("[name='region_id'] option:selected");
 
-            if (region_id) {
-                $("[name='city']").replaceWith('<select>' + '<option>' + region.cities[1].name + '</option>' + '</select>');
-            }
+            var region_id = region_option.val();
+
+            console.log(region_id);
+
+            var romania = obj.RO;
+
+            console.log(romania);
+
+
+            $("[name='city']").replaceWith('<select>' + '<option>fsdjfj</option><option>fefs</option>' + '</select>');
+
         });
     };
 });
