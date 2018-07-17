@@ -8,7 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater" name="city-updater" template="Eadesigndev_RomCity::city-updater.phtml">
+            <block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater" name="ity-updater" template="Eadesigndev_RomCity::city-updater.phtml">
 
             </block>
         </referenceContainer>

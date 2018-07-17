@@ -16,6 +16,9 @@ var config = {
             },
             'Magento_Checkout/js/action/set-shipping-information': {
                 'Eadesigndev_RomCity/js/action/set-shipping-information-mixin': true
+            },
+            'Magento_Customer/js/addressValidation': {
+                'Eadesigndev_RomCity/js/action/set-shipping-information-mixin': true
             }
         }
     }
