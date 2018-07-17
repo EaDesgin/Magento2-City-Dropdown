@@ -50,46 +50,18 @@ define([
             obj = JSON.parse(string),
             romania = obj.RO;
 
-        var region_id = $("[name = 'region_id'] option:selected").val(),
-            region = romania.regions[region_id],
-            city = $("[name='city']"),
-            cityHtml = city.parent().html(),
-            selectCity = cityHtml.replace("input", "select") + '</select>',
-            cityObject = $(selectCity),
-            cityName1 = region.cities[1].name,
-            cityName2 = region.cities[2].name,
-            selectedValue = $(cityHtml).val();
-
-
-        $.each(region, function (index,value) {
-           console.log(index);
-           console.log(value);
-        });
-
-
-        cityObject.empty();
-
-        var selectOptions = cityObject.append
-        (
-            '<option>' + '' + '</option>' +
-            '<option selected=' + selectedValue + ' value=' + cityName1 + '>' + cityName1 + '</option>' +
-            '<option selected=' + selectedValue + ' value=' + cityName2 + '>' + cityName2 + '</option>'
-        );
-
-        if ((selectedValue == cityName1) || (selectedValue == cityName2)) {
-            city.replaceWith(selectOptions);
-        }
-
         $(document).on('change', "[name='country_id']", function () {
         });
 
-        $(document).on('change', "[name='region_id']", function () {
+        $(document).on('change', "[name*='region_id']", function () {
 
             var region_id = $(this).val(),
-                region = romania.regions[region_id];
+                region = romania.regions[region_id],
+                regionName = this.name,
+                cityName = regionName.replace("region_id", "city");
 
             if (region_id) {
-                var city = $("[name='city']"),
+                var city = $("[name='"+ cityName +"']"),
                     cityHtml = city.parent().html(),
                     selectCity = cityHtml.replace("input", "select") + '</select>',
                     cityObject = $(selectCity),
@@ -108,6 +80,5 @@ define([
                 city.replaceWith(selectOptions);
             }
         });
-
     };
 });
