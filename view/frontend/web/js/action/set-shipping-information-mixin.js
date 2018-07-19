@@ -44,7 +44,6 @@ define([
                         }
                     }
                 }
-
         };
         var string = JSON.stringify(directoryData),
             obj = JSON.parse(string),
@@ -56,34 +55,45 @@ define([
             cityHtml = city.parent().html(),
             selectCity = cityHtml.replace("input", "select") + '</select>',
             cityObject = $(selectCity),
-            cityName1 = region.cities[1].name,
-            cityName2 = region.cities[2].name,
-            selectedValue = $(cityHtml).val();
-
-
-        $.each(region, function (index,value) {
-           console.log(index);
-           console.log(value);
-        });
+            selectedValue = $(cityHtml).val(),
+            htmlSelect = '<option></option>',
+            selectOptions,
+            options,
+            optionsAll,
+            cityName;
 
 
         cityObject.empty();
 
-        var selectOptions = cityObject.append
-        (
-            '<option>' + '' + '</option>' +
-            '<option selected=' + selectedValue + ' value=' + cityName1 + '>' + cityName1 + '</option>' +
-            '<option selected=' + selectedValue + ' value=' + cityName2 + '>' + cityName2 + '</option>'
-        );
+        $.each(region, function (index, value) {
+            if ($.isPlainObject(value)) {
+                $.each(value, function (index, romCity) {
+                    cityName = romCity.name;
 
-        if ((selectedValue == cityName1) || (selectedValue == cityName2)) {
+                    if (selectedValue === cityName) {
+                        options = '<option selected value=' + cityName + '>' + cityName + '</option>';
+                        htmlSelect += options;
+                    }
+                    else {
+                        optionsAll = '<option value=' + cityName + '>' + cityName + '</option>';
+                        htmlSelect += optionsAll;
+                    }
+                })
+            }
+        });
+
+        selectOptions = cityObject.append(htmlSelect);
+        if (typeof region !== 'undefined') {
             city.replaceWith(selectOptions);
         }
 
+
         $(document).on('change', "[name='country_id']", function () {
+
         });
 
         $(document).on('change', "[name='region_id']", function () {
+
 
             var region_id = $(this).val(),
                 region = romania.regions[region_id];
@@ -93,20 +103,37 @@ define([
                     cityHtml = city.parent().html(),
                     selectCity = cityHtml.replace("input", "select") + '</select>',
                     cityObject = $(selectCity),
-                    cityName1 = region.cities[1].name,
-                    cityName2 = region.cities[2].name;
+                    htmlSelect = '<option></option>',
+                    cityName,
+                    options,
+                    selectOptions;
 
                 cityObject.empty();
 
-                var selectOptions = cityObject.append
-                (
-                    '<option>' + '' + '</option>' +
-                    '<option value=' + cityName1 + '>' + cityName1 + '</option>' +
-                    '<option value=' + cityName2 + '>' + cityName2 + '</option>'
-                );
+                $.each(region, function (index, value) {
+                    if ($.isPlainObject(value)) {
+                        $.each(value, function (index, romCity) {
 
-                city.replaceWith(selectOptions);
+                            cityName = romCity.name;
+                            options = '<option value=' + cityName + '>' + cityName + '</option>';
+                            htmlSelect += options;
+                        })
+                    }
+                });
+
+
+                selectOptions = cityObject.append(htmlSelect);
+
+                if (typeof region !== 'undefined') {
+                    city.replaceWith(selectOptions);
+                } else {
+                    $(cityHtml).remove();
+                    var input = cityHtml.replace("select","input");
+                    city.replaceWith($(input));
+
+                }
             }
+
         });
 
     };
