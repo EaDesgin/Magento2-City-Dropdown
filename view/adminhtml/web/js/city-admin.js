@@ -50,6 +50,16 @@ define([
             obj = JSON.parse(string),
             romania = obj.RO;
 
+        var region_id = $("[name *= 'region_id'] option:selected").val(),
+            region = romania.regions[region_id];
+            // regionName = this.name,
+            // cityInputName = regionName.replace("region_id", "city");
+
+        console.log('region_id',region_id);
+        console.log('region',region);
+        // console.log('regionName',regionName);
+        // console.log('cityInputName',cityInputName);
+
         $(document).on('change', "[name='country_id']", function () {
         });
 
@@ -58,25 +68,33 @@ define([
             var region_id = $(this).val(),
                 region = romania.regions[region_id],
                 regionName = this.name,
-                cityName = regionName.replace("region_id", "city");
+                cityInputName = regionName.replace("region_id", "city");
 
             if (region_id) {
-                var city = $("[name='"+ cityName +"']"),
+                var city = $("[name='" + cityInputName + "']"),
                     cityHtml = city.parent().html(),
                     selectCity = cityHtml.replace("input", "select") + '</select>',
                     cityObject = $(selectCity),
-                    cityName1 = region.cities[1].name,
-                    cityName2 = region.cities[2].name;
+                    htmlSelect = '<option></option>',
+                    cityName,
+                    options,
+                    selectOptions;
 
                 cityObject.empty();
 
-                var selectOptions = cityObject.append
-                (
-                    '<option>' + '' + '</option>' +
-                    '<option value=' + cityName1 + '>' + cityName1 + '</option>' +
-                    '<option value=' + cityName2 + '>' + cityName2 + '</option>'
-                );
+                $.each(region, function (index, value) {
+                    if ($.isPlainObject(value)) {
+                        $.each(value, function (index, romCity) {
 
+                            cityName = romCity.name;
+                            options = '<option value=' + cityName + '>' + cityName + '</option>';
+                            htmlSelect += options;
+
+                        })
+                    }
+                });
+
+                selectOptions = cityObject.append(htmlSelect);
                 city.replaceWith(selectOptions);
             }
         });
