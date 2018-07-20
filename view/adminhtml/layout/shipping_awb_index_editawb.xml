@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head></head>
+
+    <body>
+        <referenceContainer name="content">
+            <block class="Eadesigndev\Awb\Block\Adminhtml\Xtea\EditAwb" name="xtea_edit_awb"/>
+            <block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater" name="city-admin" template="Eadesigndev_RomCity::city-admin.phtml"></block>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Eadesigndev\Awb\Block\Adminhtml\Xtea\Edit\Tabs" name="xtea_edit_tabs">
+                <block class="Eadesigndev\Awb\Block\Adminhtml\Xtea\Edit\Tab\General" name="xtea_edit_tab_general"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">general_section</argument>
+                    <argument name="block" xsi:type="string">xtea_edit_tab_general</argument>
+                </action>
+
+                <block class="Eadesigndev\Awb\Block\Adminhtml\Xtea\Edit\Tab\Curier" name="xtea_edit_tab_curier"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">curier_section</argument>
+                    <argument name="block" xsi:type="string">xtea_edit_tab_curier</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
