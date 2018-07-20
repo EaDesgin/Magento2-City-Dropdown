@@ -5,9 +5,10 @@ define([
     'mage/validation',
     'underscore',
     'jquery/ui'
-], function ($) {
+], function ($, wrapper) {
     'use strict';
-    return function () {
+
+    return function (setShippingInformationAction) {
 
         var directoryData = {
             "RO":
@@ -45,6 +46,7 @@ define([
                     }
                 }
         };
+
         var string = JSON.stringify(directoryData),
             obj = JSON.parse(string),
             romania = obj.RO;
@@ -52,58 +54,64 @@ define([
         var region_id = $("[name = 'region_id'] option:selected").val(),
             region = romania.regions[region_id],
             city = $("[name='city']"),
-            cityHtml = city.parent().html(),
-            selectCity = cityHtml.replace("input", "select") + '</select>',
-            cityObject = $(selectCity),
-            selectedValue = $(cityHtml).val(),
-            htmlSelect = '<option></option>',
-            selectOptions,
-            options,
-            optionsAll,
-            cityName;
+            initialInput = city.val(''),
+            cityId = $("[name *='city_id']");
 
 
-        cityObject.empty();
+        if (region_id) {
+            var cityHtml = city.parent().html(),
+                selectCity = cityHtml.replace("input", "select") + '</select>',
+                cityObject = $(selectCity),
+                htmlSelect = '<option value></option>',
+                cityName,
+                options,
+                selectOptions;
 
-        $.each(region, function (index, value) {
-            if ($.isPlainObject(value)) {
-                $.each(value, function (index, romCity) {
-                    cityName = romCity.name;
+            cityObject.empty();
 
-                    if (selectedValue === cityName) {
-                        options = '<option selected value=' + cityName + '>' + cityName + '</option>';
+            $.each(region, function (index, value) {
+                if ($.isPlainObject(value)) {
+                    $.each(value, function (index, romCity) {
+
+                        cityName = romCity.name;
+                        options = '<option value=' + cityName + '>' + cityName + '</option>';
                         htmlSelect += options;
-                    }
-                    else {
-                        optionsAll = '<option value=' + cityName + '>' + cityName + '</option>';
-                        htmlSelect += optionsAll;
-                    }
-                })
-            }
-        });
+                    })
+                }
+            });
 
-        selectOptions = cityObject.append(htmlSelect);
-        if (typeof region !== 'undefined') {
-            city.replaceWith(selectOptions);
+            selectOptions = cityObject.append(htmlSelect);
+
+            if (typeof region !== 'undefined') {
+                // city.replaceWith(selectOptions);
+                cityId.show();
+                city.hide();
+            }
+            else {
+                city.show();
+                cityId.hide();
+                // city.replaceWith(initialInput);
+            }
         }
 
 
         $(document).on('change', "[name='country_id']", function () {
-
         });
 
         $(document).on('change', "[name='region_id']", function () {
-
+            console.log('test');
 
             var region_id = $(this).val(),
                 region = romania.regions[region_id];
 
             if (region_id) {
+                var cityId = $("[name *='city_id']");
                 var city = $("[name='city']"),
                     cityHtml = city.parent().html(),
                     selectCity = cityHtml.replace("input", "select") + '</select>',
                     cityObject = $(selectCity),
-                    htmlSelect = '<option></option>',
+                    selectClass = cityObject.addClass('select').removeClass('input-text'),
+                    htmlSelect = '<option value></option>',
                     cityName,
                     options,
                     selectOptions;
@@ -121,20 +129,26 @@ define([
                     }
                 });
 
-
                 selectOptions = cityObject.append(htmlSelect);
 
                 if (typeof region !== 'undefined') {
-                    city.replaceWith(selectOptions);
-                } else {
-                    $(cityHtml).remove();
-                    var input = cityHtml.replace("select","input");
-                    city.replaceWith($(input));
-
+                    cityId.show();
+                    city.hide();
+                    // city.replaceWith(selectOptions);
+                }
+                else {
+                    city.show();
+                    cityId.hide();
+                    // city.replaceWith(initialInput);
                 }
             }
 
         });
 
+        return wrapper.wrap(setShippingInformationAction, function (originalAction, messageContainer) {
+
+
+            return originalAction(messageContainer);
+        });
     };
 });

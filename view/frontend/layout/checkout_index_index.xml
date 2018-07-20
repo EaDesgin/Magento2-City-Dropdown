@@ -9,8 +9,8 @@
     <body>
         <referenceContainer name="content">
             <block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater" name="ity-updater" template="Eadesigndev_RomCity::city-updater.phtml">
-
             </block>
         </referenceContainer>
+
     </body>
 </page>
