@@ -15,7 +15,7 @@ class Collection extends AbstractCollection
      * @var string
      */
     //@codingStandardsIgnoreLine
-    protected $_idAwbName = 'entity_id';
+    protected $_idCity = 'entity_id';
 
     /**
      * Init resource model
