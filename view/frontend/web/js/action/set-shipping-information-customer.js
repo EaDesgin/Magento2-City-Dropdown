@@ -54,8 +54,7 @@ define([
         var region_id = $("[name = 'region_id'] option:selected").val(),
             region = romania.regions[region_id],
             city = $("[name='city']"),
-            initialInput = city.val(''),
-            cityId = $("[name *='city_id']");
+            initialInput = city.val('');
 
 
         if (region_id) {
@@ -83,14 +82,10 @@ define([
             selectOptions = cityObject.append(htmlSelect);
 
             if (typeof region !== 'undefined') {
-                // city.replaceWith(selectOptions);
-                cityId.show();
-                city.hide();
+                city.replaceWith(selectOptions);
             }
             else {
-                city.show();
-                cityId.hide();
-                // city.replaceWith(initialInput);
+                city.replaceWith(initialInput);
             }
         }
 
@@ -99,13 +94,11 @@ define([
         });
 
         $(document).on('change', "[name='region_id']", function () {
-            console.log('test');
 
             var region_id = $(this).val(),
                 region = romania.regions[region_id];
 
             if (region_id) {
-                var cityId = $("[name *='city_id']");
                 var city = $("[name='city']"),
                     cityHtml = city.parent().html(),
                     selectCity = cityHtml.replace("input", "select") + '</select>',
@@ -132,14 +125,10 @@ define([
                 selectOptions = cityObject.append(htmlSelect);
 
                 if (typeof region !== 'undefined') {
-                    cityId.show();
-                    city.hide();
-                    // city.replaceWith(selectOptions);
+                    city.replaceWith(selectOptions);
                 }
                 else {
-                    city.show();
-                    cityId.hide();
-                    // city.replaceWith(initialInput);
+                    city.replaceWith(initialInput);
                 }
             }
 
