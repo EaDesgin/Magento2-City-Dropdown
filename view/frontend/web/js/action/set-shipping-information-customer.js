@@ -14,33 +14,31 @@ define([
             "RO":
                 {
                     "name": "Romania",
-                    "regions": {
-                        "278": {
-                            "code": "AB",
-                            "name": "Alba",
-                            "cities": {
-                                "1": {
-                                    "name": "Aiud",
-                                    "id": "1"
-                                },
-                                "2": {
-                                    "name": "Abrud",
-                                    "id": "2"
-                                }
+                    "278": {
+                        "code": "AB",
+                        "name": "Alba",
+                        "cities": {
+                            "1": {
+                                "name": "Aiud",
+                                "id": "1"
+                            },
+                            "2": {
+                                "name": "Abrud",
+                                "id": "2"
                             }
-                        },
-                        "279": {
-                            "code": "AR",
-                            "name": "Arad",
-                            "cities": {
-                                "1": {
-                                    "name": "Arad",
-                                    "id": "3"
-                                },
-                                "2": {
-                                    "name": "Baia",
-                                    "id": "4"
-                                }
+                        }
+                    },
+                    "279": {
+                        "code": "AR",
+                        "name": "Arad",
+                        "cities": {
+                            "1": {
+                                "name": "Arad",
+                                "id": "3"
+                            },
+                            "2": {
+                                "name": "Baia",
+                                "id": "4"
                             }
                         }
                     }
@@ -52,18 +50,19 @@ define([
             romania = obj.RO;
 
         var region_id = $("[name = 'region_id'] option:selected").val(),
-            region = romania.regions[region_id],
+            region = romania[region_id],
             city = $("[name='city']"),
             initialInput = city.val('');
-
 
         if (region_id) {
             var cityHtml = city.parent().html(),
                 selectCity = cityHtml.replace("input", "select") + '</select>',
                 cityObject = $(selectCity),
+                selectedValue = $(cityHtml).val(),
                 htmlSelect = '<option value></option>',
                 cityName,
                 options,
+                optionsAll,
                 selectOptions;
 
             cityObject.empty();
@@ -73,8 +72,14 @@ define([
                     $.each(value, function (index, romCity) {
 
                         cityName = romCity.name;
-                        options = '<option value=' + cityName + '>' + cityName + '</option>';
-                        htmlSelect += options;
+                        if (selectedValue === cityName) {
+                            options = '<option selected value=' + cityName + '>' + cityName + '</option>';
+                            htmlSelect += options;
+                        }
+                        else {
+                            optionsAll = '<option value=' + cityName + '>' + cityName + '</option>';
+                            htmlSelect += optionsAll;
+                        }
                     })
                 }
             });
@@ -96,7 +101,7 @@ define([
         $(document).on('change', "[name='region_id']", function () {
 
             var region_id = $(this).val(),
-                region = romania.regions[region_id];
+                region = romania[region_id];
 
             if (region_id) {
                 var city = $("[name='city']"),
