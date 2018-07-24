@@ -11,6 +11,10 @@ use Eadesigndev\RomCity\Model\ResourceModel\RomCity as RomCityResourceModel;
 use Eadesigndev\RomCity\Api\RomCityRepositoryInterface;
 use Magento\Framework\Exception\LocalizedException as Exception;
 use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Eadesigndev\RomCity\Model\ResourceModel\Collection\Collection;
+use Eadesigndev\RomCity\Model\ResourceModel\Collection\CollectionFactory;
+use Eadesigndev\RomCity\Api\Data\CitySearchResultInterfaceFactory;
 
 /**
  * Class RomCityRepository
@@ -38,6 +42,10 @@ class RomCityRepository implements RomCityRepositoryInterface
      */
     private $romCityFactory;
 
+    private $citySearchResultInterfaceFactory;
+
+    private $collectionFactory;
+
     /**
      * @var ManagerInterface
      */
@@ -48,18 +56,24 @@ class RomCityRepository implements RomCityRepositoryInterface
      * @param RomCityResourceModel $romCityResourceModel
      * @param RomCityInterface $romCityInterface
      * @param RomCityFactory $romCityFactory
+     * @param CollectionFactory $collectionFactory
+     * @param CitySearchResultInterfaceFactory $citySearchResultInterfaceFactory
      * @param ManagerInterface $messageManager
      */
     public function __construct(
         RomCityResourceModel $romCityResourceModel,
         RomCityInterface $romCityInterface,
         RomCityFactory $romCityFactory,
-        ManagerInterface $messageManager
+        ManagerInterface $messageManager,
+        CollectionFactory $collectionFactory,
+        CitySearchResultInterfaceFactory $citySearchResultInterfaceFactory
     ) {
-        $this->romCityResourceModel        = $romCityResourceModel;
-        $this->romCityInterface            = $romCityInterface;
-        $this->romCityFactory              = $romCityFactory;
-        $this->messageManager              = $messageManager;
+        $this->citySearchResultInterfaceFactory = $citySearchResultInterfaceFactory;
+        $this->romCityResourceModel = $romCityResourceModel;
+        $this->collectionFactory = $collectionFactory;
+        $this->romCityInterface = $romCityInterface;
+        $this->romCityFactory = $romCityFactory;
+        $this->messageManager = $messageManager;
     }
 
     /**
@@ -75,7 +89,7 @@ class RomCityRepository implements RomCityRepositoryInterface
             $this->messageManager
                 ->addExceptionMessage(
                     $e,
-                    'There was a error while saving the city '. $e->getMessage()
+                    'There was a error while saving the city ' . $e->getMessage()
                 );
         }
 
@@ -147,5 +161,51 @@ class RomCityRepository implements RomCityRepositoryInterface
     {
         $romCity = $this->getById($romCityId);
         return $this->saveAndDelete($romCity);
+    }
+
+
+    public function getList(SearchCriteriaInterface $searchCriteria)
+    {
+        $collection = $this->collectionFactory->create();
+        $this->addFiltersToCollection($searchCriteria, $collection);
+        $this->addSortOrdersToCollection($searchCriteria, $collection);
+        $this->addPagingToCollection($searchCriteria, $collection);
+        $collection->load();
+        return $this->buildSearchResult($searchCriteria, $collection);
+    }
+
+    private function addFiltersToCollection(SearchCriteriaInterface $searchCriteria, Collection $collection)
+    {
+        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
+            $fields = $conditions = [];
+            foreach ($filterGroup->getFilters() as $filter) {
+                $fields[] = $filter->getField();
+                $conditions[] = [$filter->getConditionType() => $filter->getValue()];
+            }
+            $collection->addFieldToFilter($fields, $conditions);
+        }
+    }
+
+    private function addSortOrdersToCollection(SearchCriteriaInterface $searchCriteria, Collection $collection)
+    {
+        foreach ((array)$searchCriteria->getSortOrders() as $sortOrder) {
+            $direction = $sortOrder->getDirection() == SortOrder::SORT_ASC ? 'asc' : 'desc';
+            $collection->addOrder($sortOrder->getField(), $direction);
+        }
+    }
+
+    private function addPagingToCollection(SearchCriteriaInterface $searchCriteria, Collection $collection)
+    {
+        $collection->setPageSize($searchCriteria->getPageSize());
+        $collection->setCurPage($searchCriteria->getCurrentPage());
+    }
+
+    private function buildSearchResult(SearchCriteriaInterface $searchCriteria, Collection $collection)
+    {
+        $searchResults = $this->citySearchResultInterfaceFactory->create();
+        $searchResults->setSearchCriteria($searchCriteria);
+        $searchResults->setItems($collection->getItems());
+        $searchResults->setTotalCount($collection->getSize());
+        return $searchResults;
     }
 }

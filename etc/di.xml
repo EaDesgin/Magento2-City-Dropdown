@@ -18,6 +18,15 @@
     <preference for="Eadesigndev\RomCity\Api\Data\RomCityInterface"
                 type="Eadesigndev\RomCity\Model\RomCity"/>
 
+    <preference for="Eadesigndev\RomCity\Api\RomCityRepositoryInterface"
+                type="Eadesigndev\RomCity\Model\RomCityRepository" />
+
+    <preference for="Eadesigndev\RomCity\Api\Data\CitySearchResultInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Magento\Directory\Helper\Data"
+                type="Eadesigndev\RomCity\Helper\CitiesJsonRomCity" />
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
