@@ -93,7 +93,6 @@ define([
                         })
                     }
                 });
-console.log(region);
 
                 if (cityId.has('option').length == 0)  {
 
