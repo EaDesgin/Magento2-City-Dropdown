@@ -77,6 +77,7 @@ class Cities extends Template
                         ];
                     }
                 }
+
                 $regions[$regionId] = $region;
             }
             $countriesArrayUpdated[$key] = $regions;
