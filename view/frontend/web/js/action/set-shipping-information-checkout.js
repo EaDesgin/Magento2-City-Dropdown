@@ -10,54 +10,31 @@ define([
 
     return function (setShippingInformationAction) {
 
-        var directoryData = {
-            "RO":
-                {
-                    "278": {
-                        "code": "AB",
-                        "name": "Alba",
-                        "cities": {
-                            "1": {
-                                "name": "Aiud",
-                                "id": "1"
-                            },
-                            "2": {
-                                "name": "Abrud",
-                                "id": "2"
-                            }
-                        }
-                    },
-                    "279": {
-                        "code": "AR",
-                        "name": "Arad",
-                        "cities": {
-                            "1": {
-                                "name": "Arad",
-                                "id": "3"
-                            },
-                            "2": {
-                                "name": "Baia",
-                                "id": "4"
-                            }
-                        }
-                    }
-                }
-        };
 
-        var string = JSON.stringify(directoryData),
+
+        var string = JSON.stringify($eaCitiesJson),
             obj = JSON.parse(string),
             romania = obj.RO;
 
 
-        var region_id = $(this).val(),
-            region = romania[region_id];
-
+        var region_id = $("[name = 'region_id'] option:selected").val(),
+            region = romania[region_id],
+            city = $("[name='city']"),
+           initialInput = city.val('');
 
         if (region_id) {
             var cityId = $("[name ='city_id']");
-            var city = $("[name='city']"),
+            var city = $("[name='city']");
+            var parentCity = $("[name ='shippingAddress.city']");
+            var parentCityId = $("[name ='customCheckoutForm.city_id']");
+            var cityHtml = city.parent().html(),
+                selectCity = cityHtml.replace("input", "select") + '</select>',
+                cityObject = $(selectCity),
+                selectedValue = $(cityHtml).val(),
+                htmlSelect = '<option value></option>',
                 cityName,
                 options,
+                optionsAll,
                 selectOptions;
 
             cityId.empty();
@@ -66,8 +43,14 @@ define([
                 if ($.isPlainObject(value)) {
                     $.each(value, function (index, romCity) {
                         cityName = romCity.name;
-                        options = '<option value=' + cityName + '>' + cityName + '</option>';
-                        selectOptions = cityId.append(options);
+                        if (selectedValue === cityName) {
+                            options = '<option selected value=' + cityName + '>' + cityName + '</option>';
+                            htmlSelect += options;
+                        }
+                        else {
+                            optionsAll = '<option value=' + cityName + '>' + cityName + '</option>';
+                            htmlSelect += optionsAll;
+                        }
                     })
                 }
             });
@@ -75,17 +58,6 @@ define([
             selectOptions = cityObject.append(htmlSelect);
 
 
-            if (typeof region !== 'undefined') {
-                cityId.parent().show();
-                city.parent().hide();
-                cityId.replaceWith(selectOptions);
-            }
-            else {
-                city.parent().show();
-                cityId.parent().hide();
-                city.replaceWith(initialInput);
-
-            }
         }
 
 
@@ -100,6 +72,8 @@ define([
             if (region_id) {
                 var cityId = $("[name ='city_id']");
                 var city = $("[name='city']");
+               var initialInput = city.val('');
+
                 var parentCity = $("[name ='shippingAddress.city']");
                 var parentCityId = $("[name ='customCheckoutForm.city_id']");
                     cityName,
@@ -119,17 +93,20 @@ define([
                         })
                     }
                 });
+console.log(region);
 
+                if (cityId.has('option').length == 0)  {
 
-                if (typeof region !== 'undefined') {
-
-                   parentCityId.show();
-                   parentCity.hide();
-                    cityId.replaceWith(selectOptions);
-                }
-                else {
                     parentCity.show();
                     parentCityId.hide();
+                    city.replaceWith(initialInput);
+                }
+                else {
+                    parentCityId.show();
+                    parentCity.hide();
+                    cityId.replaceWith(selectOptions);
+
+
 
                 }
             }
