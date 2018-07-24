@@ -83,6 +83,8 @@ class Cities extends Template
             $countriesArrayUpdated[$key] = $regions;
         }
 
-        return $countriesArrayUpdated;
+        $countriesJsonUpdated = json_encode($countriesArrayUpdated);
+
+        return $countriesJsonUpdated;
     }
 }

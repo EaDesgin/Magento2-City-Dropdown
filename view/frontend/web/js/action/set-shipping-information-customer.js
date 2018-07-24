@@ -10,42 +10,8 @@ define([
 
     return function (setShippingInformationAction) {
 
-        var directoryData = {
-            "RO":
-                {
-                    "name": "Romania",
-                    "278": {
-                        "code": "AB",
-                        "name": "Alba",
-                        "cities": {
-                            "1": {
-                                "name": "Aiud",
-                                "id": "1"
-                            },
-                            "2": {
-                                "name": "Abrud",
-                                "id": "2"
-                            }
-                        }
-                    },
-                    "279": {
-                        "code": "AR",
-                        "name": "Arad",
-                        "cities": {
-                            "1": {
-                                "name": "Arad",
-                                "id": "3"
-                            },
-                            "2": {
-                                "name": "Baia",
-                                "id": "4"
-                            }
-                        }
-                    }
-                }
-        };
 
-        var string = JSON.stringify(directoryData),
+        var string = JSON.stringify($eaCitiesJson),
             obj = JSON.parse(string),
             romania = obj.RO;
 
@@ -129,7 +95,7 @@ define([
 
                 selectOptions = cityObject.append(htmlSelect);
 
-                if (typeof region !== 'undefined') {
+                if (city.has('option').length == 0) {
                     city.replaceWith(selectOptions);
                 }
                 else {

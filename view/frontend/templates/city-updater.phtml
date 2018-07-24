@@ -1,7 +1,22 @@
 <?php
-/** @var $block \Eadesigndev\RomCity\Block\Checkout\CityUpdater */
+/** @var \Eadesigndev\RomCity\Block\Checkout\Cities $block */
 ?>
 
 <div class="pp-buttons-container">
 assasas
+    <?php
+    $cities = $block->citiesJson();
+
+    ?>
 </div>
+<script>
+    require(
+        [
+            'jquery'
+        ],
+        function($) {
+         $eaCitiesJson = <?php echo $cities?>;
+        });
+</script>
+<?php //echo $cities; ?>
+
