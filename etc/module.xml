@@ -4,7 +4,6 @@
     <module name="Eadesigndev_RomCity" setup_version="1.1.1">
         <sequence>
             <module name="Magento_Checkout"/>
-            <module name="Magento_Quote"/>
         </sequence>
     </module>
 </config>
