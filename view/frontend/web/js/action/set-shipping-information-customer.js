@@ -67,7 +67,8 @@ define([
         $(document).on('change', "[name='region_id']", function () {
 
             var region_id = $(this).val(),
-                region = romania[region_id];
+                region = romania[region_id],
+                htmlSelect = '';
 
             if (region_id) {
                 var city = $("[name='city']"),
@@ -75,12 +76,11 @@ define([
                     selectCity = cityHtml.replace("input", "select") + '</select>',
                     cityObject = $(selectCity),
                     selectClass = cityObject.addClass('select').removeClass('input-text'),
-                    htmlSelect = '<option value></option>',
                     cityName,
                     options,
                     selectOptions;
 
-                cityObject.empty();
+                htmlSelect = '<option value></option>';
 
                 $.each(region, function (index, value) {
                     if ($.isPlainObject(value)) {
@@ -93,12 +93,20 @@ define([
                     }
                 });
 
+                cityObject.empty();
                 selectOptions = cityObject.append(htmlSelect);
 
-                if (city.has('option').length == 0) {
-                    city.replaceWith(selectOptions);
+                // console.log('out length', Object.keys(region.cities).length)
+                // console.log('region',region)
+                console.log('htmlSelect', htmlSelect)
+
+                if (region.cities === undefined){
+                    return;
                 }
-                else {
+
+                if (Object.keys(region.cities).length !== 0) {
+                    city.replaceWith(selectOptions);
+                } else {
                     city.replaceWith(initialInput);
                 }
             }
@@ -106,8 +114,6 @@ define([
         });
 
         return wrapper.wrap(setShippingInformationAction, function (originalAction, messageContainer) {
-
-
             return originalAction(messageContainer);
         });
     };
