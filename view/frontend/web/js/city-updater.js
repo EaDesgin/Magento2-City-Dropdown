@@ -37,7 +37,7 @@ define([
             this.currentCityIdOption = this.options.currentcityId;
             this.cityIdTmpl = mageTemplate(this.options.cityIdTemplate);
 
-            this._updatecityId(this.element.find('option:selected').val());
+            this._updateCityId(this.element.find('option:selected').val());
 
             $(this.options.cityIdListId).on('change', $.proxy(function (e) {
                 this.setOption = false;
