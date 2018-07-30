@@ -11,7 +11,6 @@ define([
     return function (setShippingInformationAction) {
 
 
-
         var string = JSON.stringify($eaCitiesJson),
             obj = JSON.parse(string),
             romania = obj.RO;
@@ -20,7 +19,7 @@ define([
         var region_id = $("[name = 'region_id'] option:selected").val(),
             region = romania[region_id],
             city = $("[name='city']"),
-           initialInput = city.val('');
+            initialInput = city.val('');
 
         if (region_id) {
             var cityId = $("[name ='city_id']");
@@ -72,11 +71,11 @@ define([
             if (region_id) {
                 var cityId = $("[name ='city_id']");
                 var city = $("[name='city']");
-               var initialInput = city.val('');
+                var initialInput = city.val('');
 
                 var parentCity = $("[name ='shippingAddress.city']");
                 var parentCityId = $("[name ='customCheckoutForm.city_id']");
-                    cityName,
+                cityName,
                     options,
                     selectOptions;
                 cityId.empty();
@@ -94,7 +93,7 @@ define([
                     }
                 });
 
-                if (cityId.has('option').length == 0)  {
+                if (cityId.has('option').length == 0) {
 
                     parentCity.show();
                     parentCityId.hide();
@@ -104,7 +103,6 @@ define([
                     parentCityId.show();
                     parentCity.hide();
                     cityId.replaceWith(selectOptions);
-
 
 
                 }
