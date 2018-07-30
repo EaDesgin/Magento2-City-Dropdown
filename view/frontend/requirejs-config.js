@@ -6,7 +6,7 @@
 var config = {
     map: {
         '*': {
-            rom_city:'Eadesigndev_RomCity/js/city-updater'
+            cityUpdater:'Eadesigndev_RomCity/js/city-updater'
         }
     },
     config: {

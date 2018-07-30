@@ -14,16 +14,16 @@ define([
 
     console.log('tecssss')
 
-    $.widget('mage.regionUpdater', {
+    $.widget('mage.cityIdUpdater', {
         options: {
-            regionTemplate:
+            cityIdTemplate:
                 '<option value="<%- data.value %>" <% if (data.isSelected) { %>selected="selected"<% } %>>' +
                     '<%- data.title %>' +
                 '</option>',
-            isRegionRequired: true,
+            isCityIdRequired: true,
             isZipRequired: true,
-            isCountryRequired: true,
-            currentRegion: null,
+            isRegionRequired: true,
+            currentCityId: null,
             isMultipleCountriesAllowed: true
         },
 
@@ -32,19 +32,19 @@ define([
          * @private
          */
         _create: function () {
-            this._initCountryElement();
+            this._initRegionElement();
 
-            this.currentRegionOption = this.options.currentRegion;
-            this.regionTmpl = mageTemplate(this.options.regionTemplate);
+            this.currentCityIdOption = this.options.currentcityId;
+            this.cityIdTmpl = mageTemplate(this.options.cityIdTemplate);
 
-            this._updateRegion(this.element.find('option:selected').val());
+            this._updatecityId(this.element.find('option:selected').val());
 
-            $(this.options.regionListId).on('change', $.proxy(function (e) {
+            $(this.options.cityIdListId).on('change', $.proxy(function (e) {
                 this.setOption = false;
-                this.currentRegionOption = $(e.target).val();
+                this.currentCityIdOption = $(e.target).val();
             }, this));
 
-            $(this.options.regionInputId).on('focusout', $.proxy(function () {
+            $(this.options.cityIdInputId).on('focusout', $.proxy(function () {
                 this.setOption = true;
             }, this));
         },
@@ -53,15 +53,15 @@ define([
          *
          * @private
          */
-        _initCountryElement: function () {
+        _initRegionElement: function () {
 
             if (this.options.isMultipleCountriesAllowed) {
                 this.element.parents('div.field').show();
                 this.element.on('change', $.proxy(function (e) {
-                    this._updateRegion($(e.target).val());
+                    this._updateCityId($(e.target).val());
                 }, this));
 
-                if (this.options.isCountryRequired) {
+                if (this.options.isRegionRequired) {
                     this.element.addClass('required-entry');
                     this.element.parents('div.field').addClass('required');
                 }
@@ -108,11 +108,11 @@ define([
                     isSelected: false
                 };
 
-                if (this.options.defaultRegion === key) {
+                if (this.options.defaultCityId === key) {
                     tmplData.isSelected = true;
                 }
 
-                tmpl = this.regionTmpl({
+                tmpl = this.cityIdTmpl({
                     data: tmplData
                 });
 
@@ -126,7 +126,7 @@ define([
          * @private
          */
         _clearError: function () {
-            var args = ['clearError', this.options.regionListId, this.options.regionInputId, this.options.postcodeId];
+            var args = ['clearError', this.options.cityIdListId, this.options.cityIdInputId, this.options.postcodeId];
 
             if (this.options.clearError && typeof this.options.clearError === 'function') {
                 this.options.clearError.call(this);
@@ -141,8 +141,8 @@ define([
                     this.options.form.validation.apply(this.options.form, _.compact(args));
 
                 // Clean up errors on region & zip fix
-                $(this.options.regionInputId).removeClass('mage-error').parent().find('[generated]').remove();
-                $(this.options.regionListId).removeClass('mage-error').parent().find('[generated]').remove();
+                $(this.options.cityIdInputId).removeClass('mage-error').parent().find('[generated]').remove();
+                $(this.options.cityIdListId).removeClass('mage-error').parent().find('[generated]').remove();
                 $(this.options.postcodeId).removeClass('mage-error').parent().find('[generated]').remove();
             }
         },
@@ -153,77 +153,77 @@ define([
          * @param {String} country - 2 uppercase letter for country code
          * @private
          */
-        _updateRegion: function (country) {
+        _updateCityId: function (region) {
             // Clear validation error messages
-            var regionList = $(this.options.regionListId),
-                regionInput = $(this.options.regionInputId),
+            var cityIdList = $(this.options.cityIdListId),
+                cityIdInput = $(this.options.cityIdInputId),
                 postcode = $(this.options.postcodeId),
-                label = regionList.parent().siblings('label'),
-                requiredLabel = regionList.parents('div.field');
+                label = cityIdList.parent().siblings('label'),
+                requiredLabel = cityIdList.parents('div.field');
 
             this._clearError();
-            this._checkRegionRequired(country);
+            this._checkCityIdRequired(region);
 
             // Populate state/province dropdown list if available or use input box
-            if (this.options.regionJson[country]) {
-                this._removeSelectOptions(regionList);
-                $.each(this.options.regionJson[country], $.proxy(function (key, value) {
-                    this._renderSelectOption(regionList, key, value);
+            if (this.options.eaCitiesJson[region]) {
+                this._removeSelectOptions(cityIdList);
+                $.each(this.options.eaCitiesJson[region], $.proxy(function (key, value) {
+                    this._renderSelectOption(cityIdList, key, value);
                 }, this));
 
-                if (this.currentRegionOption) {
-                    regionList.val(this.currentRegionOption);
+                if (this.currentCitydOption) {
+                    cityIdList.val(this.currentCityIdOption);
                 }
 
                 if (this.setOption) {
-                    regionList.find('option').filter(function () {
-                        return this.text === regionInput.val();
+                    cityIdList.find('option').filter(function () {
+                        return this.text === cityIdInput.val();
                     }).attr('selected', true);
                 }
 
-                if (this.options.isRegionRequired) {
-                    regionList.addClass('required-entry').removeAttr('disabled');
+                if (this.options.isCityIdRequired) {
+                    cityIdList.addClass('required-entry').removeAttr('disabled');
                     requiredLabel.addClass('required');
                 } else {
-                    regionList.removeClass('required-entry validate-select').removeAttr('data-validate');
+                    cityIdList.removeClass('required-entry validate-select').removeAttr('data-validate');
                     requiredLabel.removeClass('required');
 
-                    if (!this.options.optionalRegionAllowed) { //eslint-disable-line max-depth
-                        regionList.attr('disabled', 'disabled');
+                    if (!this.options.optionalCityIdAllowed) { //eslint-disable-line max-depth
+                        cityIdList.attr('disabled', 'disabled');
                     }
                 }
 
-                regionList.show();
-                regionInput.hide();
-                label.attr('for', regionList.attr('id'));
+                cityIdList.show();
+                cityIdInput.hide();
+                label.attr('for', cityIdList.attr('id'));
             } else {
-                this._removeSelectOptions(regionList);
+                this._removeSelectOptions(cityIdList);
 
-                if (this.options.isRegionRequired) {
-                    regionInput.addClass('required-entry').removeAttr('disabled');
+                if (this.options.isCityIdRequired) {
+                    cityIdInput.addClass('required-entry').removeAttr('disabled');
                     requiredLabel.addClass('required');
                 } else {
-                    if (!this.options.optionalRegionAllowed) { //eslint-disable-line max-depth
-                        regionInput.attr('disabled', 'disabled');
+                    if (!this.options.optionalCityIdAllowed) { //eslint-disable-line max-depth
+                        cityIdInput.attr('disabled', 'disabled');
                     }
                     requiredLabel.removeClass('required');
-                    regionInput.removeClass('required-entry');
+                    cityIdInput.removeClass('required-entry');
                 }
 
-                regionList.removeClass('required-entry').prop('disabled', 'disabled').hide();
-                regionInput.show();
-                label.attr('for', regionInput.attr('id'));
+                cityIdList.removeClass('required-entry').prop('disabled', 'disabled').hide();
+                cityIdInput.show();
+                label.attr('for', cityIdInput.attr('id'));
             }
 
             // If country is in optionalzip list, make postcode input not required
             if (this.options.isZipRequired) {
-                $.inArray(country, this.options.countriesWithOptionalZip) >= 0 ?
+                $.inArray(region, this.options.countriesWithOptionalZip) >= 0 ?
                     postcode.removeClass('required-entry').closest('.field').removeClass('required') :
                     postcode.addClass('required-entry').closest('.field').addClass('required');
             }
 
             // Add defaultvalue attribute to state/province select element
-            regionList.attr('defaultvalue', this.options.defaultRegion);
+            cityIdList.attr('defaultvalue', this.options.defaultCityId);
         },
 
         /**
@@ -232,17 +232,17 @@ define([
          * @param {String} country - Code of the country - 2 uppercase letter for country code
          * @private
          */
-        _checkRegionRequired: function (country) {
+        _checkCityIdRequired: function (region) {
             var self = this;
 
-            this.options.isRegionRequired = false;
-            $.each(this.options.regionJson.config['regions_required'], function (index, elem) {
-                if (elem === country) {
-                    self.options.isRegionRequired = true;
+            this.options.isCityIdRequired = false;
+            $.each(this.options.eaCitiesJson.config['cityId_required'], function (index, elem) {
+                if (elem === region) {
+                    self.options.isCityIdRequired = true;
                 }
             });
         }
     });
 
-    return $.mage.regionUpdater;
+    return $.mage.cityIdUpdater;
 });

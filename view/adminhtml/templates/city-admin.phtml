@@ -1,11 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liviab
- * Date: 7/17/18
- * Time: 9:23 AM
- */
+/** @var \Eadesigndev\RomCity\Block\Checkout\Cities $block */
 ?>
+
+<div class="pp-buttons-container">
+    <?php
+    $cities = $block->citiesJson();
+
+    ?>
+</div>
+<script>
+    require(
+        [
+            'jquery'
+        ],
+        function($) {
+            $eaCitiesJson = <?php echo $cities?>;
+        });
+</script>
 <script type="text/x-magento-init">
     {
         "*": {
@@ -13,3 +24,5 @@
         }
     }
 </script>
+
+

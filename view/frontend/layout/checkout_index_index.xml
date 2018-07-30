@@ -52,7 +52,7 @@
                                                                         <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.country_id]]></item>
                                                                         <item name="field" xsi:type="string">country_id</item>
                                                                     </item>
-                                                                    <item name="sortOrder" xsi:type="string">112</item>
+                                                                    <item name="sortOrder" xsi:type="string">111</item>
                                                                 </item>
                                                                 <item name="city_id" xsi:type="array">
                                                                     <item name="component" xsi:type="string">Magento_Ui/js/form/element/select</item>
@@ -76,7 +76,7 @@
                                                                     <item name="provider" xsi:type="string">checkoutProvider</item>
                                                                     <item name="dataScope" xsi:type="string">customCheckoutForm.city_id</item>
                                                                     <item name="label" xsi:type="string">City</item>
-                                                                    <item name="sortOrder" xsi:type="string">111</item>
+                                                                    <item name="sortOrder" xsi:type="string">112</item>
                                                                 </item>
                                                                 <item name="postcode" xsi:type="array">
                                                                     <!-- post-code field has custom UI component -->
