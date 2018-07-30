@@ -7,7 +7,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Eadesigndev\Awb\Block\Adminhtml\Xtea\EditAwb" name="xtea_edit_awb"/>
-            <block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater" name="city-admin" template="Eadesigndev_RomCity::city-admin.phtml"></block>
+            <!--<block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater" name="city-admin" template="Eadesigndev_RomCity::city-admin.phtml"></block>-->
         </referenceContainer>
         <referenceContainer name="left">
             <block class="Eadesigndev\Awb\Block\Adminhtml\Xtea\Edit\Tabs" name="xtea_edit_tabs">
