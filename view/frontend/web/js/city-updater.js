@@ -164,22 +164,12 @@ define([
             console.log('test put')
 
             // Populate state/province dropdown list if available or use input box
-            // if (this.options.eaCitiesJson[region]) {
             if (eaCitiesJson !== undefined) {
                 this._removeSelectOptions(cityIdList);
                 $.each(this.options.eaCitiesJson[region], $.proxy(function (key, value) {
                     this._renderSelectOption(cityIdList, key, value);
                 }, this));
 
-                // if (this.currentCitydOption) {
-                //     cityIdList.val(this.currentCityIdOption);
-                // }
-
-                // if (this.setOption) {
-                //     cityIdList.find('option').filter(function () {
-                //         return this.text === cityIdInput.val();
-                //     }).attr('selected', true);
-                // }
 
                 if (this.options.isCityIdRequired) {
                     cityIdList.addClass('required-entry').removeAttr('disabled');
@@ -189,7 +179,6 @@ define([
                     requiredLabel.removeClass('required');
 
                     if (!this.options.optionalCityIdAllowed) { //eslint-disable-line max-depth
-                        // cityIdList.attr('disabled', 'disabled');
                     }
                 }
 
@@ -203,9 +192,7 @@ define([
                     cityIdInput.addClass('required-entry').removeAttr('disabled');
                     requiredLabel.addClass('required');
                 } else {
-                    // if (!this.options.optionalCityIdAllowed) { //eslint-disable-line max-depth
-                    //     cityIdInput.attr('disabled', 'disabled');
-                    // }
+
                     requiredLabel.removeClass('required');
                     cityIdInput.removeClass('required-entry');
                 }
@@ -232,7 +219,7 @@ define([
          * @param {String} country - Code of the country - 2 uppercase letter for country code
          * @private
          */
-        _checkCityIdRequired: function (region) {
+        _checkCityIdRequired: function (cityId) {
             var self = this, eaCitiesJson;
 
             this.options.isCityIdRequired = false;

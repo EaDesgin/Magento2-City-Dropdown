@@ -52,12 +52,6 @@ define([
 
             selectOptions = cityObject.append(htmlSelect);
 
-            if (typeof region !== 'undefined') {
-                city.replaceWith(selectOptions);
-            }
-            else {
-                city.replaceWith(initialInput);
-            }
         }
 
 

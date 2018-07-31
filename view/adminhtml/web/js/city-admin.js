@@ -4,7 +4,8 @@ define([
     'mage/template',
     'mage/validation',
     'underscore',
-    'jquery/ui'
+    'jquery/ui',
+    'Magento_Customer/edit/tab/js/addresses'
 ], function ($) {
     'use strict';
 
@@ -19,11 +20,11 @@ define([
             city = $("[name*='city']"),
             initialInput = city.val('');
 
+        var id = city.id;
 
-var id = city.val(id);
-console.log("id", id);
+        console.log(city);
 
-        console.log("initialInput",initialInput);
+        console.log("initialInput", initialInput);
         if (region_id) {
 
 
@@ -79,7 +80,6 @@ console.log("id", id);
                     cityHtml = city.parent().html(),
                     selectCity = cityHtml.replace("input", "select") + '</select>',
                     cityObject = $(selectCity),
-                    selectClass = cityObject.addClass('admin__control-select').removeClass('admin__control-text'),
                     htmlSelect = '<option value></option>',
                     cityName,
                     options,
@@ -97,17 +97,22 @@ console.log("id", id);
                         })
                     }
                 });
-                console.log("test",initialInput)
+                console.log("test", initialInput)
 
                 selectOptions = cityObject.append(htmlSelect);
 
-                if (region_id.cities == 0) {
-                    cityObject.addClass('admin__control-text').removeClass('admin__control-select');
+                var objectKey = Object.keys(region.cities);
+                var objectLenght = objectKey.length;
+
+                console.log('objectKey', objectKey);
+
+                console.log("object length", objectLenght);
+
+                if (objectLenght === 0) {
                     city.replaceWith(initialInput);
-                    console.log("finalinput",initialInput)
+                    console.log("finalinput", initialInput)
                 }
                 else {
-                    cityObject.addClass('admin__control-select').removeClass('admin__control-text');
                     city.replaceWith(selectOptions);
                 }
             }

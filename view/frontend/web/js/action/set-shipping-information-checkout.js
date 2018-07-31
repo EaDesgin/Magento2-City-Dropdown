@@ -73,7 +73,6 @@ define([
                 var cityId = $("[name ='city_id']");
                 var city = $("[name='city']");
                 var initialInput = city.val('');
-
                 var parentCity = $("[name ='shippingAddress.city']");
                 var parentCityId = $("[name ='customCheckoutForm.city_id']"),
                     cityName,
