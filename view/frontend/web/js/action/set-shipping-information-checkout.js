@@ -11,7 +11,6 @@ define([
     return function (setShippingInformationAction) {
 
 
-
         var string = JSON.stringify($eaCitiesJson),
             obj = JSON.parse(string),
             romania = obj.RO;
@@ -20,7 +19,8 @@ define([
         var region_id = $("[name = 'region_id'] option:selected").val(),
             region = romania[region_id],
             city = $("[name='city']"),
-           initialInput = city.val('');
+            initialInput = city.val('');
+
 
         if (region_id) {
             var cityId = $("[name ='city_id']");
@@ -72,10 +72,9 @@ define([
             if (region_id) {
                 var cityId = $("[name ='city_id']");
                 var city = $("[name='city']");
-               var initialInput = city.val('');
-
+                var initialInput = city.val('');
                 var parentCity = $("[name ='shippingAddress.city']");
-                var parentCityId = $("[name ='customCheckoutForm.city_id']");
+                var parentCityId = $("[name ='customCheckoutForm.city_id']"),
                     cityName,
                     options,
                     selectOptions;
@@ -94,17 +93,14 @@ define([
                     }
                 });
 
-                if (cityId.has('option').length == 0)  {
-
+                if (Object.keys(region.cities).length !== 0) {
                     parentCity.show();
                     parentCityId.hide();
                     city.replaceWith(initialInput);
-                }
-                else {
+                } else {
                     parentCityId.show();
                     parentCity.hide();
                     cityId.replaceWith(selectOptions);
-
 
 
                 }
@@ -113,8 +109,6 @@ define([
         });
 
         return wrapper.wrap(setShippingInformationAction, function (originalAction, messageContainer) {
-
-
             return originalAction(messageContainer);
         });
     };
