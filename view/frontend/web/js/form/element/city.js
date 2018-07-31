@@ -32,64 +32,59 @@ define([
          * @param {String} value
          */
         update: function (value) {
-            var region = registry.get(this.parentName + '.' + 'region_id'),
-                options = region.indexedOptions,
-                option,
-                string = JSON.stringify($eaCitiesJson),
+            var string = JSON.stringify($eaCitiesJson),
                 obj = JSON.parse(string),
                 romania = obj.RO,
+                romanianRegions = romania[value],
                 city = $("[name='city']"),
-                cityName,
-                options,
-                selectOptions,
-                regioncvb = romania[value],
+                cityId = $("[name ='city_id']"),
+                parentCity = $("[name ='shippingAddress.city']"),
+                parentCityId = $("[name ='customCheckoutForm.city_id']"),
                 initialInput = city.val(''),
-                option = options[value];
+                options,
+                selectOptions;
 
-console.log('string', string);
+            cityId.empty();
 
-            if (value) {
-                var cityId = $("[name ='city_id']");
-                var city = $("[name='city']");
-                var parentCity = $("[name ='shippingAddress.city']");
-                var parentCityId = $("[name ='customCheckoutForm.city_id']"),
-                    cityName,
-                    options,
-                    selectOptions;
-                cityId.empty();
+            var currentRegion = romania[value],
+                currentRegionCities = currentRegion.cities;
 
+            console.log('currentRegionCities', currentRegionCities);
 
-                $.each(regioncvb, function (index, value) {
-                    if ($.isPlainObject(value)) {
-                        $.each(value, function (index, romCity) {
+            $.each(currentRegionCities, function (index, cityValue) {
+                if ($.isPlainObject(cityValue)) {
+                    $.each(cityValue, function (index, romCity) {
+                        console.log('cityName', romCity);
+                        options = '<option value=' + romCity + '>' + romCity + '</option>';
+                        selectOptions = cityId.append(options);
 
-                            cityName = romCity.name;
-                            options = '<option value=' + cityName + '>' + cityName + '</option>';
-                            selectOptions = cityId.append(options);
-
-                        })
-                    }
-                });
-                var objectKey = Object.keys(regioncvb.cities);
-                var objectLenght = objectKey.length;
-
-                console.log('objectKey', objectKey);
-
-                console.log("object length", objectLenght);
-
-                if (objectLenght !== 0) {
-                    parentCityId.show();
-                    parentCity.hide();
-                    console.log("test", initialInput)
-
-                } else {
-                    parentCity.show();
-                    parentCityId.hide();
-                    city.replaceWith(initialInput);
-
+                    })
                 }
-            }
+            });
 
+            console.log('dfdfdfdfdf', cityId.length)
+            console.log(this.setOptions(
+                [{value: "278", title: "Alba", country_id: "RO", label: "Alba"}]
+            ));
+
+            options = '<option value=mizerie>mizerie</option>';
+            selectOptions = cityId.append(options);
+
+
+            console.log('selectOptions', selectOptions);
+            var objectKey = Object.keys(romanianRegions.cities),
+                objectLength = objectKey.length;
+
+            if (objectLength !== 0) {
+                parentCityId.show();
+                parentCity.hide();
+                console.log("test", initialInput)
+
+            } else {
+                parentCity.show();
+                parentCityId.hide();
+                city.replaceWith(initialInput);
+            }
         }
     });
 });
