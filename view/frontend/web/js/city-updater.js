@@ -11,14 +11,11 @@ define([
     'mage/validation'
 ], function ($, mageTemplate, _) {
     'use strict';
-
-    console.log('tecssss')
-
     $.widget('mage.cityIdUpdater', {
         options: {
             cityIdTemplate:
                 '<option value="<%- data.value %>" <% if (data.isSelected) { %>selected="selected"<% } %>>' +
-                    '<%- data.title %>' +
+                '<%- data.title %>' +
                 '</option>',
             isCityIdRequired: true,
             isZipRequired: true,
@@ -138,7 +135,7 @@ define([
                 this.options.form = $(this.options.form);
 
                 this.options.form && this.options.form.data('validator') &&
-                    this.options.form.validation.apply(this.options.form, _.compact(args));
+                this.options.form.validation.apply(this.options.form, _.compact(args));
 
                 // Clean up errors on region & zip fix
                 $(this.options.cityIdInputId).removeClass('mage-error').parent().find('[generated]').remove();
@@ -159,27 +156,30 @@ define([
                 cityIdInput = $(this.options.cityIdInputId),
                 postcode = $(this.options.postcodeId),
                 label = cityIdList.parent().siblings('label'),
-                requiredLabel = cityIdList.parents('div.field');
+                requiredLabel = cityIdList.parents('div.field'), eaCitiesJson;
 
             this._clearError();
             this._checkCityIdRequired(region);
 
+            console.log('test put')
+
             // Populate state/province dropdown list if available or use input box
-            if (this.options.eaCitiesJson[region]) {
+            // if (this.options.eaCitiesJson[region]) {
+            if (eaCitiesJson !== undefined) {
                 this._removeSelectOptions(cityIdList);
                 $.each(this.options.eaCitiesJson[region], $.proxy(function (key, value) {
                     this._renderSelectOption(cityIdList, key, value);
                 }, this));
 
-                if (this.currentCitydOption) {
-                    cityIdList.val(this.currentCityIdOption);
-                }
+                // if (this.currentCitydOption) {
+                //     cityIdList.val(this.currentCityIdOption);
+                // }
 
-                if (this.setOption) {
-                    cityIdList.find('option').filter(function () {
-                        return this.text === cityIdInput.val();
-                    }).attr('selected', true);
-                }
+                // if (this.setOption) {
+                //     cityIdList.find('option').filter(function () {
+                //         return this.text === cityIdInput.val();
+                //     }).attr('selected', true);
+                // }
 
                 if (this.options.isCityIdRequired) {
                     cityIdList.addClass('required-entry').removeAttr('disabled');
@@ -189,7 +189,7 @@ define([
                     requiredLabel.removeClass('required');
 
                     if (!this.options.optionalCityIdAllowed) { //eslint-disable-line max-depth
-                        cityIdList.attr('disabled', 'disabled');
+                        // cityIdList.attr('disabled', 'disabled');
                     }
                 }
 
@@ -203,9 +203,9 @@ define([
                     cityIdInput.addClass('required-entry').removeAttr('disabled');
                     requiredLabel.addClass('required');
                 } else {
-                    if (!this.options.optionalCityIdAllowed) { //eslint-disable-line max-depth
-                        cityIdInput.attr('disabled', 'disabled');
-                    }
+                    // if (!this.options.optionalCityIdAllowed) { //eslint-disable-line max-depth
+                    //     cityIdInput.attr('disabled', 'disabled');
+                    // }
                     requiredLabel.removeClass('required');
                     cityIdInput.removeClass('required-entry');
                 }
@@ -233,14 +233,18 @@ define([
          * @private
          */
         _checkCityIdRequired: function (region) {
-            var self = this;
+            var self = this, eaCitiesJson;
 
             this.options.isCityIdRequired = false;
-            $.each(this.options.eaCitiesJson.config['cityId_required'], function (index, elem) {
-                if (elem === region) {
-                    self.options.isCityIdRequired = true;
-                }
-            });
+            eaCitiesJson = this.options.eaCitiesJson;
+
+            if (eaCitiesJson !== undefined) {
+                $.each(this.options.eaCitiesJson.config['cityId_required'], function (index, elem) {
+                    if (elem === region) {
+                        self.options.isCityIdRequired = true;
+                    }
+                });
+            }
         }
     });
 

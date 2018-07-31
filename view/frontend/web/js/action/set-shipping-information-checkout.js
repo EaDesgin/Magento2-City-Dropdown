@@ -21,6 +21,7 @@ define([
             city = $("[name='city']"),
             initialInput = city.val('');
 
+
         if (region_id) {
             var cityId = $("[name ='city_id']");
             var city = $("[name='city']");
@@ -74,8 +75,8 @@ define([
                 var initialInput = city.val('');
 
                 var parentCity = $("[name ='shippingAddress.city']");
-                var parentCityId = $("[name ='customCheckoutForm.city_id']");
-                cityName,
+                var parentCityId = $("[name ='customCheckoutForm.city_id']"),
+                    cityName,
                     options,
                     selectOptions;
                 cityId.empty();
@@ -93,13 +94,11 @@ define([
                     }
                 });
 
-                if (cityId.has('option').length == 0) {
-
+                if (Object.keys(region.cities).length !== 0) {
                     parentCity.show();
                     parentCityId.hide();
                     city.replaceWith(initialInput);
-                }
-                else {
+                } else {
                     parentCityId.show();
                     parentCity.hide();
                     cityId.replaceWith(selectOptions);
@@ -111,8 +110,6 @@ define([
         });
 
         return wrapper.wrap(setShippingInformationAction, function (originalAction, messageContainer) {
-
-
             return originalAction(messageContainer);
         });
     };

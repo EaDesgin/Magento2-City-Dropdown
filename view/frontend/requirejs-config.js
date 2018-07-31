@@ -19,7 +19,10 @@ var config = {
             },
             'Magento_Customer/js/addressValidation': {
                 'Eadesigndev_RomCity/js/action/set-shipping-information-customer': true
-            }
+            },
+            'Magento_Checkout/js/action/create-shipping-address': {
+                'Eadesigndev_RomCity/js/action/create-shipping-address-mixin': true
+            },
         }
     }
 };
