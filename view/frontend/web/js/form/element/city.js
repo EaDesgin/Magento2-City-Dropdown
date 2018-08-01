@@ -16,6 +16,7 @@ define([
     'mage/template',
     'mage/validation',
     'underscore',
+    'Magento_Ui/js/form/element/abstract',
     'jquery/ui'
 ], function (_, registry, Select, defaultPostCodeResolver, $) {
     'use strict';
@@ -36,54 +37,39 @@ define([
                 obj = JSON.parse(string),
                 romania = obj.RO,
                 romanianRegions = romania[value],
-                city = $("[name='city']"),
-                cityId = $("[name ='city_id']"),
                 parentCity = $("[name ='shippingAddress.city']"),
-                parentCityId = $("[name ='customCheckoutForm.city_id']"),
-                initialInput = city.val(''),
-                options,
-                selectOptions;
+                currentRegionCities = romanianRegions.cities;
 
-            cityId.empty();
+            var cityOptions = [];
+            $.each(currentRegionCities, function (index, cityOptionValue) {
 
-            var currentRegion = romania[value],
-                currentRegionCities = currentRegion.cities;
+                var name = cityOptionValue.name;
 
-            console.log('currentRegionCities', currentRegionCities);
+                var jsonObject = {
+                    value: index,
+                    title: name,
+                    country_id: "",
+                    label: name
+                };
 
-            $.each(currentRegionCities, function (index, cityValue) {
-                if ($.isPlainObject(cityValue)) {
-                    $.each(cityValue, function (index, romCity) {
-                        console.log('cityName', romCity);
-                        options = '<option value=' + romCity + '>' + romCity + '</option>';
-                        selectOptions = cityId.append(options);
-
-                    })
-                }
+                cityOptions.push(jsonObject);
             });
 
-            console.log('dfdfdfdfdf', cityId.length)
-            console.log(this.setOptions(
-                [{value: "278", title: "Alba", country_id: "RO", label: "Alba"}]
-            ));
+            this.setOptions(cityOptions);
 
-            options = '<option value=mizerie>mizerie</option>';
-            selectOptions = cityId.append(options);
+            var getCity = this.parentName + '.' + 'city',
+                city = registry.get(getCity);
 
+            var cases = cityOptions.length;
 
-            console.log('selectOptions', selectOptions);
-            var objectKey = Object.keys(romanianRegions.cities),
-                objectLength = objectKey.length;
-
-            if (objectLength !== 0) {
-                parentCityId.show();
-                parentCity.hide();
-                console.log("test", initialInput)
-
-            } else {
+            if (cases === 0) {
+                city.show();
+                this.hide();
                 parentCity.show();
-                parentCityId.hide();
-                city.replaceWith(initialInput);
+            } else {
+                city.hide();
+                this.show();
+                parentCity.hide();
             }
         }
     });
