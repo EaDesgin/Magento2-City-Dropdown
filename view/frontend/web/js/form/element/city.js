@@ -16,6 +16,7 @@ define([
     'mage/template',
     'mage/validation',
     'underscore',
+    'Magento_Ui/js/form/element/abstract',
     'jquery/ui'
 ], function (_, registry, Select, defaultPostCodeResolver, $) {
     'use strict';
@@ -32,64 +33,44 @@ define([
          * @param {String} value
          */
         update: function (value) {
-            var region = registry.get(this.parentName + '.' + 'region_id'),
-                options = region.indexedOptions,
-                option,
-                string = JSON.stringify($eaCitiesJson),
+            var string = JSON.stringify($eaCitiesJson),
                 obj = JSON.parse(string),
                 romania = obj.RO,
-                city = $("[name='city']"),
-                cityName,
-                options,
-                selectOptions,
-                regioncvb = romania[value],
-                initialInput = city.val(''),
-                option = options[value];
+                romanianRegions = romania[value],
+                parentCity = $("[name ='shippingAddress.city']"),
+                currentRegionCities = romanianRegions.cities;
 
-console.log('string', string);
+            var cityOptions = [];
+            $.each(currentRegionCities, function (index, cityOptionValue) {
 
-            if (value) {
-                var cityId = $("[name ='city_id']");
-                var city = $("[name='city']");
-                var parentCity = $("[name ='shippingAddress.city']");
-                var parentCityId = $("[name ='customCheckoutForm.city_id']"),
-                    cityName,
-                    options,
-                    selectOptions;
-                cityId.empty();
+                var name = cityOptionValue.name;
 
+                var jsonObject = {
+                    value: index,
+                    title: name,
+                    country_id: "",
+                    label: name
+                };
 
-                $.each(regioncvb, function (index, value) {
-                    if ($.isPlainObject(value)) {
-                        $.each(value, function (index, romCity) {
+                cityOptions.push(jsonObject);
+            });
 
-                            cityName = romCity.name;
-                            options = '<option value=' + cityName + '>' + cityName + '</option>';
-                            selectOptions = cityId.append(options);
+            this.setOptions(cityOptions);
 
-                        })
-                    }
-                });
-                var objectKey = Object.keys(regioncvb.cities);
-                var objectLenght = objectKey.length;
+            var getCity = this.parentName + '.' + 'city',
+                city = registry.get(getCity);
 
-                console.log('objectKey', objectKey);
+            var cases = cityOptions.length;
 
-                console.log("object length", objectLenght);
-
-                if (objectLenght !== 0) {
-                    parentCityId.show();
-                    parentCity.hide();
-                    console.log("test", initialInput)
-
-                } else {
-                    parentCity.show();
-                    parentCityId.hide();
-                    city.replaceWith(initialInput);
-
-                }
+            if (cases === 0) {
+                city.show();
+                this.hide();
+                parentCity.show();
+            } else {
+                city.hide();
+                this.show();
+                parentCity.hide();
             }
-
         }
     });
 });
