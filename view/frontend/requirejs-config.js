@@ -4,12 +4,7 @@
  */
 
 var config = {
-    map: {
-        '*': {
-            cityUpdater:'Eadesigndev_RomCity/js/city-updater',
-           regionUpdater:'Eadesigndev_RomCity/js/form/element/city'
-        }
-    },
+
     config: {
         mixins: {
             'Magento_Checkout/js/model/shipping-rates-validation-rules': {

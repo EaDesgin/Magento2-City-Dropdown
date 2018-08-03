@@ -20,17 +20,16 @@
         });
 </script>
 <?php //echo $cities; ?>
-
 <script type="text/x-magento-init">
     {
         "#form-validate": {
             "addressValidation": {}
         },
-        "#region": {
-            "cityUpdater": {
+        "#country": {
+            "regionUpdater": {
                 "optionalRegionAllowed": <?= /* @noEscape */ $block->getConfig('general/region/display_all') ? 'true' : 'false' ?>,
-                "cityIdListId": "#city_id",
-                "cityIdInputId": "#city",
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
                 "postcodeId": "#zip",
                 "form": "#form-validate",
                 "regionJson": <?= /* @noEscape */ $this->helper(\Magento\Directory\Helper\Data::class)->getRegionJson() ?>,
@@ -40,3 +39,4 @@
         }
     }
 </script>
+
