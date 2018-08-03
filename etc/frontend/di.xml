@@ -4,7 +4,7 @@
 
     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
         <plugin name="romcity_checkout_billing_address_fields"
-                type="Eadesigndev\RomCity\Plugin\Checkout\BillingLayout" sortOrder="1"/>
+                type="Eadesigndev\RomCity\Plugin\Checkout\BillingAddressLayoutProcessor" sortOrder="1"/>
     </type>
 
 </config>
