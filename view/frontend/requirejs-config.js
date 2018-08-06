@@ -15,6 +15,9 @@ var config = {
             },
             'Magento_Checkout/js/action/create-shipping-address': {
                 'Eadesigndev_RomCity/js/action/create-shipping-address-mixin': true
+            },
+            "Magento_Checkout/js/view/shipping" : {
+                "Eadesigndev_RomCity/js/view/shipping": true
             }
         }
     }
