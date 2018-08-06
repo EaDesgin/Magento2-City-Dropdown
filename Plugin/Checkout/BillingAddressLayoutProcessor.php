@@ -58,7 +58,7 @@ class BillingAddressLayoutProcessor
                 'elementTmpl' => 'ui/form/element/select',
                 'id' => 'city_id'
             ],
-            'dataScope' => 'billingAddress' . $paymentMethodCode . 'city_id',
+            'dataScope' => 'city_id',
             'label' => 'City Id',
             'provider' => 'checkoutProvider',
             'sortOrder' => 100,
@@ -70,8 +70,7 @@ class BillingAddressLayoutProcessor
             ],
             'id' => 'city_id'
         ];
-
-
+        
         $this->result['components']['checkout']['children']['steps']['children']['billing-step']['children']
         ['payment']['children']['payments-list']['children'][$paymentMethodForm]['children']
         ['form-fields']['children']['city_id'] = $field;
