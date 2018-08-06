@@ -58,9 +58,8 @@ define([
             this.setOptions(cityOptions);
 
             var getCity = this.parentName + '.' + 'city',
-                city = registry.get(getCity);
-
-            var cases = cityOptions.length;
+                city = registry.get(getCity),
+                cases = cityOptions.length;
 
             if (cases === 0) {
                 city.show();

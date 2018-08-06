@@ -13,92 +13,47 @@ define([
 
         var string = JSON.stringify($eaCitiesJson),
             obj = JSON.parse(string),
-            romania = obj.RO;
-
-        var region_id = $("[name = 'region_id'] option:selected").val(),
-            region = romania[region_id],
-            city = $("[name='city']"),
-            initialInput = city.val('');
-
-        if (region_id) {
-            var cityHtml = city.parent().html(),
-                selectCity = cityHtml.replace("input", "select") + '</select>',
-                cityObject = $(selectCity),
-                selectedValue = $(cityHtml).val(),
-                htmlSelect = '<option value></option>',
-                cityName,
-                options,
-                optionsAll,
-                selectOptions;
-
-            cityObject.empty();
-
-            $.each(region, function (index, value) {
-                if ($.isPlainObject(value)) {
-                    $.each(value, function (index, romCity) {
-
-                        cityName = romCity.name;
-                        if (selectedValue === cityName) {
-                            options = '<option selected value=' + cityName + '>' + cityName + '</option>';
-                            htmlSelect += options;
-                        }
-                        else {
-                            optionsAll = '<option value=' + cityName + '>' + cityName + '</option>';
-                            htmlSelect += optionsAll;
-                        }
-                    })
-                }
-            });
-
-            selectOptions = cityObject.append(htmlSelect);
-
-        }
-
-
-        $(document).on('change', "[name='country_id']", function () {
-        });
+            romanianRegions = obj.RO,
+            initialcity = $("[name='city']"),
+            initialInput = initialcity.val('');
 
         $(document).on('change', "[name='region_id']", function () {
 
-            var region_id = $(this).val(),
-                region = romania[region_id],
+            var regionId = $(this).val(),
+                regions = romanianRegions[regionId],
                 htmlSelect = '';
 
-            if (region_id) {
+            if (regionId) {
+
                 var city = $("[name='city']"),
                     cityHtml = city.parent().html(),
                     selectCity = cityHtml.replace("input", "select") + '</select>',
                     cityObject = $(selectCity),
-                    selectClass = cityObject.addClass('select').removeClass('input-text'),
                     cityName,
-                    options,
+                    cityOptions,
                     selectOptions;
 
                 htmlSelect = '<option value></option>';
 
-                $.each(region, function (index, value) {
+                $.each(regions, function (index, value) {
                     if ($.isPlainObject(value)) {
-                        $.each(value, function (index, romCity) {
+                        $.each(value, function (index, cityOptionValue) {
+                            cityName = cityOptionValue.name;
+                            cityOptions = '<option value=' + cityName + '>' + cityName + '</option>';
+                            htmlSelect += cityOptions;
 
-                            cityName = romCity.name;
-                            options = '<option value=' + cityName + '>' + cityName + '</option>';
-                            htmlSelect += options;
-                        })
+                        });
                     }
                 });
 
                 cityObject.empty();
                 selectOptions = cityObject.append(htmlSelect);
 
-                // console.log('out length', Object.keys(region.cities).length)
-                // console.log('region',region)
-                console.log('htmlSelect', htmlSelect)
-
-                if (region.cities === undefined){
+                if (regions.cities === undefined) {
                     return;
                 }
 
-                if (Object.keys(region.cities).length !== 0) {
+                if (Object.keys(regions.cities).length !== 0) {
                     city.replaceWith(selectOptions);
                 } else {
                     city.replaceWith(initialInput);
@@ -112,3 +67,8 @@ define([
         });
     };
 });
+
+
+
+
+
