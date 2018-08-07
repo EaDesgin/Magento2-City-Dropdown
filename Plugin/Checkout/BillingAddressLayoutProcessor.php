@@ -51,20 +51,30 @@ class BillingAddressLayoutProcessor
     private function addField($paymentMethodForm, $paymentMethodCode)
     {
         $field = [
-            'component' => 'Magento_Ui/js/form/element/select',
+            'component' => 'Eadesigndev_RomCity/js/form/element/city',
             'config' => [
                 'customScope' => 'billingAddress' . $paymentMethodCode,
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/select',
                 'id' => 'city_id'
             ],
-            'dataScope' => 'city_id',
-            'label' => 'City Id',
+            'label' => 'City',
+            'value' => 'value_2',
+            'dataScope' => 'customCheckoutForm.city_id',
             'provider' => 'checkoutProvider',
             'sortOrder' => 100,
             'customEntry' => null,
             'visible' => true,
-            'options' => [],
+            'options' => [
+                '0' => [
+                    'label' => 'Please select',
+                    'value' => ''
+                ]
+            ],
+            'filterBy' => [
+                'target' => '<![CDATA[${ $.provider }:${ $.parentScope }.region_id]]>',
+                'field' => 'region_id'
+            ],
             'validation' => [
                 'required-entry' => true
             ],
