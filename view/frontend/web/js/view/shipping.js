@@ -21,7 +21,6 @@ define(['jquery',],
                     return false;
                 }
 
-                console.log('test', notValid);
                 var result = this._super();
 
                 return result;
