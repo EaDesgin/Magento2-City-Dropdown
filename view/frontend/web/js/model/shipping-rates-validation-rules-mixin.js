@@ -14,7 +14,9 @@ define(['jquery'], function ($) {
                 });
             });
 
-            observableFields.push('city'); // Load shipping method on Postcode chnage
+            observableFields.push('city_id'); // Load shipping method on City_id changed
+            observableFields.push('city'); // Load shipping method on City changed
+
             return observableFields;
         };
 
