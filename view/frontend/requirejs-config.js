@@ -24,6 +24,9 @@ var config = {
             },
             "Magento_Checkout/js/view/shipping" : {
                 "Eadesigndev_RomCity/js/view/shipping": true
+            },
+            "Magento_Checkout/js/view/billing-address" : {
+                "Eadesigndev_RomCity/js/view/billing-address": true
             }
         }
     }
