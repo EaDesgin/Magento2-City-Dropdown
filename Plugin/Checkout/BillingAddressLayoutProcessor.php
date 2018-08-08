@@ -38,8 +38,8 @@ class BillingAddressLayoutProcessor
                 $paymentMethodForm,
                 $paymentMethodCode
             );
+            $this->addField($paymentMethodForm, $paymentMethodCode);
         }
-        $this->addField($paymentMethodForm, $paymentMethodCode);
 
         return $this->result;
     }
