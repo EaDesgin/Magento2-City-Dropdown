@@ -9,10 +9,12 @@ define([
         return wrapper.wrap(setShippingInformationAction, function (originalAction, messageContainer) {
 
             var shippingAddress = quote.shippingAddress(),
-                shippingCityId = $("[name = 'city_id'] option:selected"),
+                shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
                 shippingCityIdValue = shippingCityId.text();
 
             shippingAddress.city = shippingCityIdValue;
+
+            console.log('shipping value' , shippingCityIdValue)
 
             return originalAction(messageContainer);
         });
