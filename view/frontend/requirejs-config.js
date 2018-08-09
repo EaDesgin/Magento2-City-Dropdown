@@ -10,6 +10,7 @@ var config = {
             'Magento_Checkout/js/model/shipping-rates-validation-rules': {
                 'Eadesigndev_RomCity/js/model/shipping-rates-validation-rules-mixin': true
             },
+
             'Magento_Customer/js/addressValidation': {
                 'Eadesigndev_RomCity/js/action/set-shipping-information-customer': true
             },
@@ -27,6 +28,9 @@ var config = {
             },
             "Magento_Checkout/js/view/billing-address" : {
                 "Eadesigndev_RomCity/js/view/billing-address": true
+            },
+            'Magento_Checkout/js/model/shipping-rate-processor/new-address': {
+                'Eadesigndev_RomCity/js/model/shipping-rate-processor/new-address': true
             }
         }
     }
