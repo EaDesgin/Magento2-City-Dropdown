@@ -25,7 +25,6 @@ define(['jquery',
         return function (Component) {
             return Component.extend({
                 updateAddress: function () {
-                    console.log('test')
                     var addressData, newBillingAddress;
 
                     if (this.selectedAddress() && this.selectedAddress() != newAddressOption) { //eslint-disable-line eqeqeq
@@ -56,8 +55,8 @@ define(['jquery',
 
                             var billingCityId = $("#billing-new-address-form [name = 'city_id'] option:selected"),
                                 billingCityIdValue = billingCityId.text();
-
-                            newBillingAddress.city = billingCityIdValue;
+                            
+                             newBillingAddress.city = billingCityIdValue;
                         }
                     }
                     this.updateAddresses();

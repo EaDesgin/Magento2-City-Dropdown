@@ -22,4 +22,4 @@ define(['jquery'], function ($) {
 
         return targetFunction;
     };
-}); 
+});
