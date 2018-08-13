@@ -8,9 +8,8 @@ var config = {
     config: {
         mixins: {
             'Magento_Checkout/js/model/shipping-rates-validation-rules': {
-                'Eadesigndev_RomCity/js/model/shipping-rates-validation-rules-mixin': true
+                'Eadesigndev_RomCity/js/model/shipping-rates-validation-rules': true
             },
-
             'Magento_Customer/js/addressValidation': {
                 'Eadesigndev_RomCity/js/action/set-shipping-information-customer': true
             },
