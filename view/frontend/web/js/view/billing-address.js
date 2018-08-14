@@ -8,6 +8,8 @@ define(['jquery',
         'Magento_Checkout/js/action/create-billing-address',
         'Magento_Checkout/js/action/select-billing-address',
         'Magento_Checkout/js/checkout-data',
+        'Magento_Customer/js/customer-data',
+
     ],
     function ($,
               ko,
@@ -19,11 +21,50 @@ define(['jquery',
               createBillingAddress,
               selectBillingAddress,
               checkoutData,
+              customerData
     ) {
         'use strict';
-
+        var lastSelectedBillingAddress = null,
+            newAddressOption = {
+                /**
+                 * Get new address label
+                 * @returns {String}
+                 */
+                getAddressInline: function () {
+                    return $t('New Address');
+                },
+                customerAddressId: null
+            },
+            countryData = customerData.get('directory-data'),
+            addressOptions = addressList().filter(function (address) {
+                return address.getType() == 'customer-address'; //eslint-disable-line eqeqeq
+            });
         return function (Component) {
             return Component.extend({
+                useShippingAddress: function () {
+                    if (this.isAddressSameAsShipping()) {
+                        selectBillingAddress(quote.shippingAddress());
+                        this.updateAddresses();
+                        this.isAddressDetailsVisible(true);
+
+
+                    } else {
+                        lastSelectedBillingAddress = quote.billingAddress();
+                        quote.billingAddress(null);
+                        this.isAddressDetailsVisible(false);
+                        var shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
+                            shippingCityIdValue = shippingCityId.text();
+                        var billingCityId = $("#billing-new-address-form [name = 'city_id'] option:selected"),
+                            billingCityIdValue = billingCityId.val()
+                        lastSelectedBillingAddress.city = shippingCityIdValue;
+
+                    }
+
+                    checkoutData.setSelectedBillingAddress(null);
+
+
+                    return true;
+                },
                 updateAddress: function () {
                     var addressData, newBillingAddress;
 
@@ -55,8 +96,8 @@ define(['jquery',
 
                             var billingCityId = $("#billing-new-address-form [name = 'city_id'] option:selected"),
                                 billingCityIdValue = billingCityId.text();
-                            
-                             newBillingAddress.city = billingCityIdValue;
+
+                            newBillingAddress.city = billingCityIdValue;
                         }
                     }
                     this.updateAddresses();
