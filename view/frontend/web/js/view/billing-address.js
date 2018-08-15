@@ -47,17 +47,10 @@ define(['jquery',
                         this.updateAddresses();
                         this.isAddressDetailsVisible(true);
 
-
                     } else {
                         lastSelectedBillingAddress = quote.billingAddress();
                         quote.billingAddress(null);
                         this.isAddressDetailsVisible(false);
-                        var shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
-                            shippingCityIdValue = shippingCityId.text();
-                        var billingCityId = $("#billing-new-address-form [name = 'city_id'] option:selected"),
-                            billingCityIdValue = billingCityId.val()
-                        lastSelectedBillingAddress.city = shippingCityIdValue;
-
                     }
 
                     checkoutData.setSelectedBillingAddress(null);

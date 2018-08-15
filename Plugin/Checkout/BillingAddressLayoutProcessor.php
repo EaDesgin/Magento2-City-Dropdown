@@ -66,10 +66,7 @@ class BillingAddressLayoutProcessor
             'customEntry' => null,
             'visible' => true,
             'options' => [
-                '0' => [
-                    'label' => 'Please select',
-                    'value' => ''
-                ]
+              
             ],
             'filterBy' => [
                 'target' => '<![CDATA[${ $.provider }:${ $.parentScope }.region_id]]>',
