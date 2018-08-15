@@ -83,12 +83,7 @@
                                                                     <item name="validation" xsi:type="array">
                                                                         <item name="required-entry" xsi:type="boolean">true</item>
                                                                     </item>
-                                                                    <item name="options" xsi:type="array">
-                                                                        <item name="0" xsi:type="array">
-                                                                            <item name="label" xsi:type="string">Please select value</item>
-                                                                            <item name="value" xsi:type="string"></item>
-                                                                        </item>
-                                                                    </item>
+
                                                                     <item name="filterBy" xsi:type="array">
                                                                         <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.region_id]]></item>
                                                                         <item name="field" xsi:type="string">region_id</item>

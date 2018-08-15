@@ -13,14 +13,14 @@ var config = {
             'Magento_Customer/js/addressValidation': {
                 'Eadesigndev_RomCity/js/action/set-shipping-information-customer': true
             },
-            'Magento_Checkout/js/action/create-billing-address': {
-                'Eadesigndev_RomCity/js/action/set-billing-address-mixin': true
-            },
             'Magento_Checkout/js/action/create-shipping-address': {
                 'Eadesigndev_RomCity/js/action/create-shipping-address-mixin': true
             },
             'Magento_Checkout/js/action/set-shipping-information': {
                 'Eadesigndev_RomCity/js/action/set-shipping-information-mixin': true
+            },
+            'Magento_Checkout/js/action/create-billing-address': {
+                'Eadesigndev_RomCity/js/action/set-billing-information-mixin': true
             },
             "Magento_Checkout/js/view/shipping" : {
                 "Eadesigndev_RomCity/js/view/shipping": true

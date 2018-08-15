@@ -25,9 +25,9 @@ define([
                 cache = rateRegistry.get(address.getCacheKey());
                 serviceUrl = resourceUrlManager.getUrlForEstimationShippingMethodsForNewAddress(quote);
                 cityValue = address.city;
-                cityId = $("#shipping-new-address-form [name='city_id'] option:selected");
+                cityId = $("[name='city_id'] option:selected");
                 cityIdOptions = cityId.text();
-                cityInput = $("#shipping-new-address-form [name='city']");
+                cityInput = $("[name='city']");
                 cityInputValue = cityInput.text();
 
 
