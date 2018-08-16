@@ -14,8 +14,6 @@ define([
 
             shippingAddress.city = shippingCityIdValue;
 
-            console.log('shipping value' , shippingCityIdValue)
-
             return originalAction(messageContainer);
         });
     };
