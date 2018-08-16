@@ -87,7 +87,7 @@ define(['jquery',
                             checkoutData.setNewCustomerBillingAddress(addressData);
 
 
-                            var billingCityId = $("#billing-new-address-form [name = 'city_id'] option:selected"),
+                            var billingCityId = $("[name = 'city_id'] option:selected"),
                                 billingCityIdValue = billingCityId.text();
 
                             newBillingAddress.city = billingCityIdValue;
