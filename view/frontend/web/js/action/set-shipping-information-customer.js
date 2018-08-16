@@ -56,9 +56,16 @@ define([
                 if (Object.keys(regions.cities).length !== 0) {
                     city.replaceWith(selectOptions);
                 } else {
-                    city.replaceWith(initialInput);
+                    city.replaceWith(initialInput,"initial input");
                 }
             }
+            $(document).on('change', "[name='city']", function () {
+
+                var citySelectedValue= $("[name = 'city'] option:selected").val();
+                var cityInputValue = $("[name= 'city']").val();
+                cityInputValue= citySelectedValue;
+
+            });
 
         });
 
