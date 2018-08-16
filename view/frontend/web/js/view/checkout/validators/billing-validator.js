@@ -1,8 +1,7 @@
 define(
     [
         'uiComponent',
-        'Magento_Checkout/js/model/payment/additional-validators',
-        'Eadesigndev_CustomAttributes/js/model/checkout/validators/billing-validator'
+        'Magento_Checkout/js/model/payment/additional-validators'
     ],
     function (Component, additionalValidators, billingValidator) {
         'use strict';
