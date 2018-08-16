@@ -14,7 +14,6 @@ define(
         shippingRatesValidationRules
     ) {
         'use strict';
-        console.log('TEST')
         defaultShippingRatesValidator.registerValidator('eadesigndevurgent', shippingRatesValidator);
         defaultShippingRatesValidationRules.registerRules('eadesigndevurgent', shippingRatesValidationRules);
         return Component;

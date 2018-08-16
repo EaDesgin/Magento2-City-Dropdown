@@ -13,8 +13,7 @@ define([
 
         return wrapper.wrap(setShippingInformationAction, function (originalAction, messageContainer) {
             var address = quote.shippingAddress();
-            console.log('quote', quote.shippingAddress);
-            console.log('address', address);
+
             return originalAction(messageContainer);
         });
     };

@@ -65,20 +65,18 @@ define([
                 city.show();
                 this.hide();
                 parentCity.show();
-                console.log(city)
             } else {
                 city.hide();
-                console.log(this,"this")
 
                 this.show();
                 parentCity.hide();
             }
             $(document).on('change', "[name='city_id']", function () {
 
-                var cityIdValue= $("#shipping-new-address-form [name = 'city_id'] option:selected").text();
-                console.log(cityIdValue,"id val")
-                var cityValue = $("#shipping-new-address-form [name= 'city']").val();
-                cityValue= cityIdValue;
+                var cityIdValue = $("#shipping-new-address-form [name = 'city_id'] option:selected").text(),
+                    cityValue = $("#shipping-new-address-form [name= 'city']").val();
+
+                cityValue = cityIdValue;
 
             });
         }

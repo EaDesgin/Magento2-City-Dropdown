@@ -18,7 +18,7 @@ define([
     return function () {
         return {
             getRates: function (address) {
-                var cache, serviceUrl, payload, cityValue = address.city, cityId, cityIdOptions, cityInput,
+                var cache, serviceUrl, payload, cityValue , cityId, cityIdOptions, cityInput,
                     cityInputValue;
 
                 shippingService.isLoading(true);
