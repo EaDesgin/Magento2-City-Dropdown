@@ -92,8 +92,6 @@ define(['jquery',
                         addressData = addressConverter.formAddressDataToQuoteAddress(
                             this.source.get('shippingAddress')
                         );
-                        console.log(addressData,"address Data")
-
                         //Copy form data to quote shipping address object
                         for (field in addressData) {
                             if (addressData.hasOwnProperty(field) &&  //eslint-disable-line max-depth
@@ -121,7 +119,7 @@ define(['jquery',
                         return false;
                     }
 
-                    return true;
+                    return result;
                 },
                 saveNewAddress: function () {
                     var addressData,
