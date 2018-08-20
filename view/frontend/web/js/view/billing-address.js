@@ -59,7 +59,7 @@ define(['jquery',
                     return true;
                 },
                 updateAddress: function () {
-                    var addressData, newBillingAddress;
+                    var addressData, newBillingAddress, billingCityId, billingCityIdValue;
 
                     if (this.selectedAddress() && this.selectedAddress() != newAddressOption) { //eslint-disable-line eqeqeq
                         selectBillingAddress(this.selectedAddress());
@@ -85,14 +85,13 @@ define(['jquery',
                             selectBillingAddress(newBillingAddress);
                             checkoutData.setSelectedBillingAddress(newBillingAddress.getKey());
                             checkoutData.setNewCustomerBillingAddress(addressData);
-
-
-                            var billingCityId = $("[name = 'city_id'] option:selected"),
+                            billingCityId = $("#billing-new-address-form [name = 'city_id'] option:selected"),
                                 billingCityIdValue = billingCityId.text();
-
-                            newBillingAddress.city = billingCityIdValue;
                         }
                     }
+
+                    newBillingAddress.city = billingCityIdValue;
+
                     this.updateAddresses();
                 },
             });
