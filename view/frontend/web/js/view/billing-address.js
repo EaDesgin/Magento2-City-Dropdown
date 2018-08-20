@@ -41,6 +41,42 @@ define(['jquery',
             });
         return function (Component) {
             return Component.extend({
+                initObservable: function () {
+                    this._super()
+                        .observe({
+                            selectedAddress: null,
+                            isAddressDetailsVisible: quote.billingAddress() != null,
+                            isAddressFormVisible: !customer.isLoggedIn() || addressOptions.length === 1,
+                            isAddressSameAsShipping: false,
+                            saveInAddressBook: 1
+                        });
+
+                    quote.billingAddress.subscribe(function (newAddress) {
+
+                        var shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
+                            shippingCityIdValue = shippingCityId.text();
+
+                        newAddress.city = shippingCityIdValue;
+
+                        if (quote.isVirtual()) {
+                            this.isAddressSameAsShipping(false);
+                        } else {
+                            this.isAddressSameAsShipping(
+                                newAddress != null &&
+                                newAddress.getCacheKey() == quote.shippingAddress().getCacheKey() //eslint-disable-line eqeqeq
+                            );
+                        }
+
+                        if (newAddress != null && newAddress.saveInAddressBook !== undefined) {
+                            this.saveInAddressBook(newAddress.saveInAddressBook);
+                        } else {
+                            this.saveInAddressBook(1);
+                        }
+                        this.isAddressDetailsVisible(true);
+                    }, this);
+
+                    return this;
+                },
                 useShippingAddress: function () {
                     if (this.isAddressSameAsShipping()) {
                         selectBillingAddress(quote.shippingAddress());

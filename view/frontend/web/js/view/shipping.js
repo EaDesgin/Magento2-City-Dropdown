@@ -82,12 +82,10 @@ define(['jquery',
 
                         shippingAddress = quote.shippingAddress();
 
-                        console.log(shippingAddress, "shipping address")
-
                       var  shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
                             shippingCityIdValue = shippingCityId.text();
 
-                       shippingAddress.city = shippingCityIdValue;
+                        shippingAddress.city = shippingCityIdValue;
 
                         addressData = addressConverter.formAddressDataToQuoteAddress(
                             this.source.get('shippingAddress')
@@ -119,7 +117,7 @@ define(['jquery',
                         return false;
                     }
 
-                    return result;
+                    return true;
                 },
                 saveNewAddress: function () {
                     var addressData,
