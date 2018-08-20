@@ -9,6 +9,7 @@ define([
 
 
         return wrapper.wrap(setShippingInformationAction, function (originalAction, messageContainer) {
+
             var address = quote.shippingAddress();
 
             if (address !== null) {
