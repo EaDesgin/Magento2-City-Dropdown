@@ -59,13 +59,13 @@ class Upload extends Action
         Data $dataHelper
     ) {
         $this->romCityRepository = $romCityRepository;
-        $this->resultRedirect    = $resultRedirect;
-        $this->romCityFactory    = $romCityFactory;
+        $this->resultRedirect = $resultRedirect;
+        $this->romCityFactory = $romCityFactory;
         $this->collectionFactory = $collectionFactory;
-        $this->dataHelper        = $dataHelper;
-        $this->directoryList     = $directoryList;
-        $this->moduleReader      = $moduleReader;
-        $this->csvProccesor      = $csvProccesor;
+        $this->dataHelper = $dataHelper;
+        $this->directoryList = $directoryList;
+        $this->moduleReader = $moduleReader;
+        $this->csvProccesor = $csvProccesor;
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
@@ -99,41 +99,25 @@ class Upload extends Action
 
             $csvDataProcessed = [];
             unset($csvData[0]);
-
-            /** @var  Collection $collection */
-            $collection = $this->collectionFactory->create();
-
-            foreach ($csvData as $csvValue) {
-                $csvValueProcessed = [];
-                foreach ($csvValue as $key => $value) {
-                    if ($key == 0) {
-                        $csvValueProcessed['entity_id'] = $value;
-                    }
-
-                    if ($key == 1) {
-                        $csvValueProcessed['region_id'] = $value;
-                    }
-
-                    if ($key == 2) {
-                        $csvValueProcessed['city'] = $value;
-                    }
-                }
-                $csvDataProcessed[] = $csvValueProcessed;
-            }
+            list($collection, $csvDataProcessed) = $this->csvProcessValues($csvData, $csvDataProcessed);
 
             foreach ($csvDataProcessed as $dataRow) {
                 $regionId = $dataRow['region_id'];
                 $cityName = $dataRow['city'];
                 $entityId = $dataRow['entity_id'];
 
-                $romCityFactory = $this->romCityFactory->create();
+                $romCityRepository = $this->romCityFactory->create();
                 if (isset($entityId) && is_numeric($entityId)) {
-                    $romCityFactory = $this->romCityRepository->getById($entityId);
+                    $romCityRepository = $this->romCityRepository->getById($entityId);
+                    $romCityRepository->setCityName($cityName);
+                    $this->romCityRepository->save($romCityRepository);
+                    continue;
                 }
-                $romCityFactory->setRegionId($regionId);
-                $romCityFactory->setCityName($cityName);
 
-                $collection->addItem($romCityFactory);
+                $romCityRepository->setRegionId($regionId);
+                $romCityRepository->setCityName($cityName);
+
+                $collection->addItem($romCityRepository);
             }
         }
         $collection->walk('save');
@@ -146,4 +130,36 @@ class Upload extends Action
     {
         return $this->_authorization->isAllowed(self::ADMIN_RESOURCE);
     }
+
+    /**
+     * @param $csvData
+     * @param $csvDataProcessed
+     * @return array
+     */
+    private function csvProcessValues($csvData, $csvDataProcessed)
+    {
+        /** @var  Collection $collection */
+        $collection = $this->collectionFactory->create();
+
+        foreach ($csvData as $csvValue) {
+            $csvValueProcessed = [];
+            foreach ($csvValue as $key => $value) {
+                if ($key == 0) {
+                    $csvValueProcessed['entity_id'] = $value;
+                }
+
+                if ($key == 1) {
+                    $csvValueProcessed['region_id'] = $value;
+                }
+
+                if ($key == 2) {
+                    $csvValueProcessed['city'] = $value;
+                }
+            }
+            $csvDataProcessed[] = $csvValueProcessed;
+        }
+        return [$collection, $csvDataProcessed];
+    }
 }
+
+
