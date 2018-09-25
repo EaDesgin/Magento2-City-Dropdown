@@ -41,7 +41,7 @@ define([
                 currentRegionCities;
 
             romanianRegions = romania[value];
-            
+
             if(romanianRegions === undefined){
 
                 this.hide();
