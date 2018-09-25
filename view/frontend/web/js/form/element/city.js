@@ -36,9 +36,22 @@ define([
             var string = JSON.stringify($eaCitiesJson),
                 obj = JSON.parse(string),
                 romania = obj.RO,
-                romanianRegions = romania[value],
-                parentCity = $("[name ='shippingAddress.city']"),
-                currentRegionCities = romanianRegions.cities;
+                romanianRegions,
+                parentCity,
+                currentRegionCities;
+
+            romanianRegions = romania[value];
+            
+            if(romanianRegions === undefined){
+
+                this.hide();
+
+                return romanianRegions;
+            }
+
+            parentCity = $("[name ='shippingAddress.city']");
+
+            currentRegionCities = romanianRegions.cities;
 
             var cityOptions = [];
             $.each(currentRegionCities, function (index, cityOptionValue) {
@@ -71,14 +84,6 @@ define([
                 this.show();
                 parentCity.hide();
             }
-            $(document).on('change', "[name='city_id']", function () {
-
-                var cityIdValue = $("#shipping-new-address-form [name = 'city_id'] option:selected").text(),
-                    cityValue = $("#shipping-new-address-form [name= 'city']").val();
-
-                cityValue = cityIdValue;
-
-            });
         }
     });
 });
