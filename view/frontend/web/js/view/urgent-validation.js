@@ -10,12 +10,12 @@ define(
         Component,
         defaultShippingRatesValidator,
         defaultShippingRatesValidationRules,
-        shippingRatesValidator,
-        shippingRatesValidationRules
+        eadesigndevurgentShippingRatesValidator,
+        eadesigndevurgentShippingRatesValidationRules
     ) {
         'use strict';
-        defaultShippingRatesValidator.registerValidator('eadesigndevurgent', shippingRatesValidator);
-        defaultShippingRatesValidationRules.registerRules('eadesigndevurgent', shippingRatesValidationRules);
+        defaultShippingRatesValidator.registerValidator('eadesigndevurgent', eadesigndevurgentShippingRatesValidator);
+        defaultShippingRatesValidationRules.registerRules('eadesigndevurgent', eadesigndevurgentShippingRatesValidationRules);
         return Component;
 
     }
