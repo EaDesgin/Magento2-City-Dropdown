@@ -10,8 +10,9 @@ define([
     'underscore',
     'uiRegistry',
     'Magento_Ui/js/form/element/select',
-    'Magento_Checkout/js/model/default-post-code-resolver'
-], function (_, registry, Select, defaultPostCodeResolver) {
+    'Magento_Checkout/js/model/default-post-code-resolver',
+    'jquery'
+], function (_, registry, Select, defaultPostCodeResolver,$) {
     'use strict';
 
     return Select.extend({

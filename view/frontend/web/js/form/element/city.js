@@ -39,7 +39,6 @@ define([
                 romanianRegions,
                 parentCity,
                 currentRegionCities;
-
             romanianRegions = romania[value];
 
             if(romanianRegions === undefined){
@@ -50,7 +49,6 @@ define([
             }
 
             parentCity = $("[name ='shippingAddress.city']");
-
             currentRegionCities = romanianRegions.cities;
 
             var cityOptions = [];
@@ -80,7 +78,6 @@ define([
                 parentCity.show();
             } else {
                 city.hide();
-
                 this.show();
                 parentCity.hide();
             }

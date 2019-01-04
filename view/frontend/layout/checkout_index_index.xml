@@ -68,17 +68,19 @@
                                                                         <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.country_id]]></item>
                                                                         <item name="field" xsi:type="string">country_id</item>
                                                                     </item>
-                                                                    <item name="sortOrder" xsi:type="string">111</item>
+                                                                    <item name="sortOrder" xsi:type="string">118</item>
+                                                                </item>
+                                                                <item name="city" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">119</item>
                                                                 </item>
                                                                 <item name="city_id" xsi:type="array">
-
-
                                                                     <item name="component" xsi:type="string">Eadesigndev_RomCity/js/form/element/city</item>
                                                                     <item name="config" xsi:type="array">
                                                                         <!--customScope is used to group elements within a single form (e.g. they can be validated separately)-->
                                                                         <item name="customScope" xsi:type="string">customCheckoutForm</item>
                                                                         <item name="template" xsi:type="string">ui/form/field</item>
                                                                         <item name="elementTmpl" xsi:type="string">ui/form/element/select</item>
+
                                                                     </item>
                                                                     <item name="validation" xsi:type="array">
                                                                         <item name="required-entry" xsi:type="boolean">true</item>
@@ -93,7 +95,24 @@
                                                                     <item name="provider" xsi:type="string">checkoutProvider</item>
                                                                     <item name="dataScope" xsi:type="string">customCheckoutForm.city_id</item>
                                                                     <item name="label" xsi:type="string">City</item>
-                                                                    <item name="sortOrder" xsi:type="string">112</item>
+                                                                    <item name="id" xsi:type="string">City</item>
+                                                                    <item name="sortOrder" xsi:type="string">120</item>
+                                                                </item>
+                                                                <item name="postcode" xsi:type="array">
+                                                                    <!-- post-code field has custom UI component -->
+                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/post-code</item>
+                                                                    <item name="validation" xsi:type="array">
+                                                                        <item name="required-entry" xsi:type="boolean">true</item>
+                                                                    </item>
+                                                                    <item name="sortOrder" xsi:type="string">121</item>
+                                                                </item>
+                                                                <item name="telephone" xsi:type="array">
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="tooltip" xsi:type="array">
+                                                                            <item name="description" xsi:type="string" translate="true">For delivery questions.</item>
+                                                                        </item>
+                                                                    </item>
+                                                                    <item name="sortOrder" xsi:type="string">122</item>
                                                                 </item>
                                                             </item>
                                                         </item>
