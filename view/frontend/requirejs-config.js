@@ -30,6 +30,12 @@ var config = {
             },
             'Magento_Checkout/js/model/shipping-rate-processor/new-address': {
                 'Eadesigndev_RomCity/js/model/shipping-rate-processor/new-address': true
+            },
+            'Magento_Checkout/js/view/shipping-information/list':{
+                'Eadesigndev_RomCity/js/view/shipping-information/list-mixin' :true
+            },
+            'Magento_Checkout/js/view/payment/default':{
+                'Eadesigndev_RomCity/js/view/payment/default-mixin' :true
             }
         }
     }

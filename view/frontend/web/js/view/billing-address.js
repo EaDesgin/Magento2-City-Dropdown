@@ -53,10 +53,28 @@ define(['jquery',
 
                     quote.billingAddress.subscribe(function (newAddress) {
 
-                        var shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
-                            shippingCityIdValue = shippingCityId.text();
+                        if(newAddress) {
+                            let shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
+                                shippingCityIdValue = shippingCityId.text();
+                            let billingAddressCity = $(".billing-address-form form [name='city_id'] option:selected");
 
-                        newAddress.city = shippingCityIdValue;
+
+                            if (this.isAddressSameAsShipping()) {
+                                newAddress.city = shippingCityIdValue;
+                            } else if (billingAddressCity) {
+                                newAddress.city = billingAddressCity.text();
+                            }
+                            else{
+                                newAddress.city = shippingCityIdValue;
+                            }
+                            if (localStorage.getItem('city_id') && !this.isAddressSameAsShipping()) {
+                                newAddress.city = localStorage.getItem('city_id_value');
+                            }
+                        }
+                        $(".billing-address-form form [name='city_id']").on('change',function () {
+                            localStorage.setItem('city_id', $('option:selected',this).index());
+                            localStorage.setItem('city_id_value', $('option:selected',this).text());
+                        });
 
                         if (quote.isVirtual()) {
                             this.isAddressSameAsShipping(false);
@@ -110,6 +128,8 @@ define(['jquery',
 
                         if (!this.source.get('params.invalid')) {
                             addressData = this.source.get(this.dataScopePrefix);
+                            let billingAddressCity = $(".billing-address-form form [name='city_id'] option:selected");
+                            addressData.city = billingAddressCity.text();
 
                             if (customer.isLoggedIn() && !this.customerHasAddresses) { //eslint-disable-line max-depth
                                 this.saveInAddressBook(1);
@@ -125,9 +145,6 @@ define(['jquery',
                                 billingCityIdValue = billingCityId.text();
                         }
                     }
-
-                    newBillingAddress.city = billingCityIdValue;
-
                     this.updateAddresses();
                 },
             });
