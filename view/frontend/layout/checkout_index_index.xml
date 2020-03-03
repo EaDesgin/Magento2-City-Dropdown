@@ -71,8 +71,6 @@
                                                                     <item name="sortOrder" xsi:type="string">111</item>
                                                                 </item>
                                                                 <item name="city_id" xsi:type="array">
-
-
                                                                     <item name="component" xsi:type="string">Eadesigndev_RomCity/js/form/element/city</item>
                                                                     <item name="config" xsi:type="array">
                                                                         <!--customScope is used to group elements within a single form (e.g. they can be validated separately)-->
@@ -92,7 +90,7 @@
                                                                     <item name="value" xsi:type="string">value_2</item>
                                                                     <item name="provider" xsi:type="string">checkoutProvider</item>
                                                                     <item name="dataScope" xsi:type="string">customCheckoutForm.city_id</item>
-                                                                    <item name="label" xsi:type="string">City</item>
+                                                                    <item name="label" xsi:type="string">Localitate</item>
                                                                     <item name="sortOrder" xsi:type="string">112</item>
                                                                 </item>
                                                             </item>
