@@ -22,7 +22,7 @@
                 <label>Upload City</label>
                 <field id="city_file_upload" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File"
                        sortOrder="6" showInDefault="1" showInWebsite="1">
-                    <comment>To import cities, choose file and "Save Config". Then push the button "Import Cities!".</comment>
+                    <comment>Create in pub/media a folder with name test. To import cities, choose file and "Save Config". Then push the button "Import Cities!".</comment>
                     <label>Browse import file </label>
                     <backend_model>Eadesigndev\RomCity\Model\Config\Backend\UploadFile</backend_model>
                     <upload_dir config="system" scope_info="0">test</upload_dir>

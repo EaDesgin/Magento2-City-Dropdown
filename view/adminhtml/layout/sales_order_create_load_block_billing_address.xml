@@ -8,14 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater"
-                   template="Eadesigndev_RomCity::order/create/form/address.phtml"
-                   name="billing_address">
-                <arguments>
-                    <argument name="customerAddressFormatter" xsi:type="object">Magento\Sales\ViewModel\Customer\AddressFormatter</argument>
-                    <argument name="customerAddressCollection" xsi:type="object">Magento\Customer\Model\ResourceModel\Address\Collection</argument>
-                </arguments>
-            </block>
+            <block class="Eadesigndev\RomCity\Block\Checkout\CityUpdater" template="Eadesigndev_RomCity::order/create/form/address.phtml" name="billing_address"/>
         </referenceContainer>
     </body>
 </page>
