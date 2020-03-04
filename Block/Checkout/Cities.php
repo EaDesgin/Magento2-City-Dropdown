@@ -54,6 +54,7 @@ class Cities extends Template
         $items = $citiesList->getItems();
 
         /** @var RomCity $item */
+        $citiesData = [];
         foreach ($items as $item) {
             $citiesData[$item->getEntityId()] = $item;
         }
