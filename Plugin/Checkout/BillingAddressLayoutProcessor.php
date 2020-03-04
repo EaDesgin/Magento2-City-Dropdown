@@ -81,6 +81,10 @@ class BillingAddressLayoutProcessor
         $this->result['components']['checkout']['children']['steps']['children']['billing-step']['children']
         ['payment']['children']['payments-list']['children'][$paymentMethodForm]['children']
         ['form-fields']['children']['city_id'] = $field;
+        
+        $this->result['components']['checkout']['children']['steps']['children']['billing-step']['children']
+        ['payment']['children']['payments-list']['children'][$paymentMethodForm]['dataScopePrefix'] = 'customCheckoutForm';
+
 
         return $this;
     }
