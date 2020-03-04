@@ -33,25 +33,29 @@ define([
          * @param {String} value
          */
         update: function (value) {
-            var string = JSON.stringify($eaCitiesJson),
-                obj = JSON.parse(string),
-                romania = obj.RO,
-                romanianRegions,
+            var country = registry.get(this.parentName + '.' + 'country_id');
+            var region = registry.get(this.parentName + '.' + 'region_id');
+            var countryValue = country.value();
+            var regionValue = region.value() ;
+
+            var countryString = JSON.stringify($eaCitiesJson),
+                countryObj = JSON.parse(countryString) ? JSON.parse(countryString) : {},
+                countryCities = countryObj[countryValue] ? countryObj[countryValue] : {},
+                countryRegions,
                 parentCity,
                 currentRegionCities;
 
-            romanianRegions = romania[value];
+            countryRegions = countryCities[regionValue];
 
-            if(romanianRegions === undefined){
+            if(countryRegions === undefined){
 
                 this.hide();
-
-                return romanianRegions;
+                return countryRegions;
             }
 
             parentCity = $("[name ='shippingAddress.city']");
 
-            currentRegionCities = romanianRegions.cities;
+            currentRegionCities = countryRegions.cities;
 
             var cityOptions = [];
             $.each(currentRegionCities, function (index, cityOptionValue) {
