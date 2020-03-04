@@ -33,9 +33,11 @@ define([
          * @param {String} value
          */
         update: function (value) {
+            var country = registry.get(this.parentName + '.' + 'country_id');
+
             var string = JSON.stringify($eaCitiesJson),
-                obj = JSON.parse(string),
-                romania = obj.RO,
+                obj = JSON.parse(string) ?? {},
+                romania = obj[country.value()] ?? {},
                 romanianRegions,
                 parentCity,
                 currentRegionCities;
