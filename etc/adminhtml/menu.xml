@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="Eadesigndev_RomCity::romcity" title="RomCity" module="Eadesigndev_RomCity" sortOrder="10"
-             resource="Eadesigndev_RomCity::romcity" parent="Eadesigndev_Eacore::eadesign"/>
+             resource="Eadesigndev_RomCity::romcity"/>
 
         <add id="Eadesigndev_RomCity::romcity_list" title="Manage City List" module="Eadesigndev_RomCity" sortOrder="10"
              parent="Eadesigndev_RomCity::romcity" action="manage_romcity/index"
