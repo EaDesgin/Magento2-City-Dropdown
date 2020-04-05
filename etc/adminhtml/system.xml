@@ -3,7 +3,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="ea_romcity" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="Eadesigndev_romcity" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>RomCity</label>
             <tab>eadesign_extensions</tab>
             <resource>Eadesigndev_RomCity::configuration</resource>
