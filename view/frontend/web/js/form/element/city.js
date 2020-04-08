@@ -61,6 +61,7 @@ define([
                 country_id: "",
                 label: 'Selectati localitatea'
             };
+            cityOptions.push(jsonObject);
 
             $.each(currentRegionCities, function (index, cityOptionValue) {
 
