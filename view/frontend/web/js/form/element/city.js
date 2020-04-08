@@ -54,6 +54,14 @@ define([
             currentRegionCities = romanianRegions.cities;
 
             var cityOptions = [];
+
+            var jsonObject = {
+                value: '',
+                title: 'Selectati localitatea',
+                country_id: "",
+                label: 'Selectati localitatea'
+            };
+
             $.each(currentRegionCities, function (index, cityOptionValue) {
 
                 var name = cityOptionValue.name;
