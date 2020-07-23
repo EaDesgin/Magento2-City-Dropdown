@@ -12,7 +12,9 @@ define([
                 shippingCityId = $("#shipping-new-address-form [name = 'city_id'] option:selected"),
                 shippingCityIdValue = shippingCityId.text();
 
-            shippingAddress.city = shippingCityIdValue;
+            if (shippingCityIdValue.length) {
+                shippingAddress.city = shippingCityIdValue;
+            }
 
             return originalAction(messageContainer);
         });
