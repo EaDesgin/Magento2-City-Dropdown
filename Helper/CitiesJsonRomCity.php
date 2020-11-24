@@ -4,16 +4,8 @@ namespace Eadesigndev\RomCity\Helper;
 
 use Eadesigndev\RomCity\Model\RomCityRepository;
 use Eadesigndev\RomCity\Model\RomCity;
-use Magento\Directory\Model\CurrencyFactory;
-use Magento\Directory\Model\Region;
-use Magento\Directory\Model\ResourceModel\Country\Collection;
-use Magento\Directory\Model\ResourceModel\Region\CollectionFactory;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Directory\Helper\Data;
-use Magento\Framework\App\Cache\Type\Config;
-use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Json\Helper\Data as DataHelper;
-use Magento\Store\Model\StoreManagerInterface;
 
 class CitiesJsonRomCity extends Data
 {
@@ -22,13 +14,13 @@ class CitiesJsonRomCity extends Data
     private $searchCriteria;
 
     public function __construct(
-        Context $context,
-        Config $configCacheType,
-        Collection $countryCollection,
-        CollectionFactory $regCollectionFactory,
-        DataHelper $jsonHelper,
-        StoreManagerInterface $storeManager,
-        CurrencyFactory $currencyFactory,
+        \Magento\Framework\App\Helper\Context $context,
+        \Magento\Framework\App\Cache\Type\Config $configCacheType,
+        \Magento\Directory\Model\ResourceModel\Country\Collection $countryCollection,
+        \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regCollectionFactory,
+        \Magento\Framework\Json\Helper\Data $jsonHelper,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Directory\Model\CurrencyFactory $currencyFactory,
         RomCityRepository $romCityRepository,
         SearchCriteriaBuilder $searchCriteria
     ) {
@@ -71,13 +63,12 @@ class CitiesJsonRomCity extends Data
         $items = $citiesList->getItems();
 
         /** @var RomCity $item */
-        $citiesData = [];
         foreach ($items as $item) {
             $citiesData[$item->getEntityId()] = $item;
         }
 
         foreach ($collection as $region) {
-            /** @var $region Region */
+            /** @var $region \Magento\Directory\Model\Region */
             if (!$region->getRegionId()) {
                 continue;
             }

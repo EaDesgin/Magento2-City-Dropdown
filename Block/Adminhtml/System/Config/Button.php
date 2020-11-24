@@ -5,6 +5,10 @@ namespace Eadesigndev\RomCity\Block\Adminhtml\System\Config;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
+/**
+ * Class Button
+ * @package Eadesigndev\RomCity\Block\Adminhtml\System\Config
+ */
 class Button extends Field
 {
     /**
