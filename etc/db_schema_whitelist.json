@@ -1,0 +1,15 @@
+{
+    "eadesign_romcity": {
+        "column": {
+            "entity_id": true,
+            "region_id": true,
+            "city": true
+        },
+        "index": {
+            "EADESIGN_ROMCITY_REGION_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

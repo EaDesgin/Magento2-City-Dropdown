@@ -34,6 +34,6 @@ class RomCity extends AbstractDb
 
     public function _construct()
     {
-        $this->_init(InstallSchema::TABLE, RomCityInterface::ENTITY_ID);
+        $this->_init('eadesign_romcity', RomCityInterface::ENTITY_ID);
     }
 }

@@ -8,23 +8,14 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Handles the config and other settings
- *
- * Class Data
- * @package Eadesigndev\RomCity\Helper
- */
 class Data extends AbstractHelper
 {
     const NAME_FILE  = 'ea_romcity/custom_group/city_file_upload';
 
-    /**
-     * @var ScopeConfigInterface
-     */
+    /** @var ScopeConfigInterface  */
     public $scopeConfig;
-    /**
-     * @var StoreManagerInterface
-     */
+
+    /** @var StoreManagerInterface  */
     public $storeManager;
 
     /**
