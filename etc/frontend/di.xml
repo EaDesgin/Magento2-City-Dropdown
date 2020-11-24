@@ -7,4 +7,11 @@
                 type="Eadesigndev\RomCity\Plugin\Checkout\BillingAddressLayoutProcessor" sortOrder="1"/>
     </type>
 
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="city_provider" xsi:type="object">Eadesigndev\RomCity\Model\Cities</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

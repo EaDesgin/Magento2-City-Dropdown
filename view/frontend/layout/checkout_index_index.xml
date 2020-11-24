@@ -1,245 +1,45 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="content">
-            <block class="Eadesigndev\RomCity\Block\Checkout\Cities" name="ity-updater" template="Eadesigndev_RomCity::city-updater.phtml">
-            </block>
-            <referenceBlock name="checkout.root">
-                <arguments>
+        <referenceBlock name="checkout.root">
+            <arguments>
                 <argument name="jsLayout" xsi:type="array">
                     <item name="components" xsi:type="array">
                         <item name="checkout" xsi:type="array">
                             <item name="children" xsi:type="array">
                                 <item name="steps" xsi:type="array">
-                                    <item name="component" xsi:type="string">uiComponent</item>
-                                    <item name="displayArea" xsi:type="string">steps</item>
                                     <item name="children" xsi:type="array">
                                         <item name="shipping-step" xsi:type="array">
-                                            <item name="component" xsi:type="string">uiComponent</item>
-                                            <item name="sortOrder" xsi:type="string">1</item>
                                             <item name="children" xsi:type="array">
-                                                <item name="step-config" xsi:type="array">
-                                                    <item name="component" xsi:type="string">uiComponent</item>
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="shipping-rates-validation" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
-                                                                <item name="eadesigndevurgent" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Eadesigndev_RomCity/js/view/urgent-validation</item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                    </item>
-                                                </item>
                                                 <item name="shippingAddress" xsi:type="array">
                                                     <item name="children" xsi:type="array">
                                                         <item name="shipping-address-fieldset" xsi:type="array">
-                                                            <item name="component" xsi:type="string">uiComponent</item>
-                                                            <item name="config" xsi:type="array">
-                                                                <item name="deps" xsi:type="array">
-                                                                    <item name="0" xsi:type="string">checkoutProvider</item>
-                                                                </item>
-                                                            </item>
-                                                            <item name="displayArea" xsi:type="string">additional-fieldsets</item>
                                                             <item name="children" xsi:type="array">
-                                                                <!-- The following items override configuration of corresponding address attributes -->
-                                                                <item name="region" xsi:type="array">
-                                                                    <!-- Make region attribute invisible on frontend. Corresponding input element is created by region_id field -->
-                                                                    <item name="visible" xsi:type="boolean">false</item>
-                                                                </item>
-
-                                                                <item name="region_id" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Eadesigndev_RomCity/js/form/element/region</item>
+                                                                <item name="city_id" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Eadesigndev_RomCity/js/form/element/city-select</item>
                                                                     <item name="config" xsi:type="array">
                                                                         <item name="template" xsi:type="string">ui/form/field</item>
                                                                         <item name="elementTmpl" xsi:type="string">ui/form/element/select</item>
-                                                                        <item name="customEntry" xsi:type="string">shippingAddress.region</item>
                                                                     </item>
+
+                                                                    <item name="label" xsi:type="string" translate="true">City</item>
+                                                                    <item name="sortOrder" xsi:type="string">110</item>
                                                                     <item name="validation" xsi:type="array">
-                                                                        <item name="required-entry" xsi:type="boolean">true</item>
+                                                                        <item name="required-entry" xsi:type="string">true</item>
                                                                     </item>
-                                                                    <!-- Value of region_id field is filtered by the value of county_id attribute -->
-                                                                    <item name="filterBy" xsi:type="array">
-                                                                        <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.country_id]]></item>
-                                                                        <item name="field" xsi:type="string">country_id</item>
-                                                                    </item>
-                                                                    <item name="sortOrder" xsi:type="string">111</item>
                                                                 </item>
-                                                                <item name="city_id" xsi:type="array">
+
+                                                                <item name="city" xsi:type="array">
                                                                     <item name="component" xsi:type="string">Eadesigndev_RomCity/js/form/element/city</item>
                                                                     <item name="config" xsi:type="array">
-                                                                        <!--customScope is used to group elements within a single form (e.g. they can be validated separately)-->
-                                                                        <item name="customScope" xsi:type="string">customCheckoutForm</item>
                                                                         <item name="template" xsi:type="string">ui/form/field</item>
-                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/select</item>
                                                                     </item>
-                                                                    <item name="validation" xsi:type="array">
-                                                                        <item name="required-entry" xsi:type="boolean">true</item>
-                                                                    </item>
+                                                                    <item name="sortOrder" xsi:type="string">110</item>
+                                                                </item>
 
-                                                                    <item name="filterBy" xsi:type="array">
-                                                                        <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.region_id]]></item>
-                                                                        <item name="field" xsi:type="string">region_id</item>
-                                                                    </item>
-                                                                    <!-- value element allows to specify default value of the form field -->
-                                                                    <item name="value" xsi:type="string">value_2</item>
-                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                    <item name="dataScope" xsi:type="string">customCheckoutForm.city_id</item>
-                                                                    <item name="label" xsi:type="string">Localitate</item>
-                                                                    <item name="sortOrder" xsi:type="string">112</item>
+                                                                <item name="vat_id" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">65</item>
                                                                 </item>
-                                                            </item>
-                                                        </item>
-                                                    </item>
-                                                </item>
-                                            </item>
-                                        </item>
-                                        <item name="billing-step" xsi:type="array">
-                                            <item name="component" xsi:type="string">uiComponent</item>
-                                            <item name="sortOrder" xsi:type="string">2</item>
-                                            <item name="children" xsi:type="array">
-                                                <item name="payment" xsi:type="array">
-                                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/payment</item>
-                                                    <item name="config" xsi:type="array">
-                                                        <item name="title" xsi:type="string" translate="true">Payment</item>
-                                                    </item>
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="renders" xsi:type="array">
-                                                            <item name="component" xsi:type="string">uiComponent</item>
-                                                            <item name="children" xsi:type="array">
-                                                                <!-- merge payment method renders here -->
-                                                            </item>
-                                                        </item>
-                                                        <item name="additional-payment-validators" xsi:type="array">
-                                                            <item name="component" xsi:type="string">uiComponent</item>
-                                                            <item name="children" xsi:type="array">
-                                                                <!-- merge payment validators here -->
-                                                                <item name="email-validator" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/payment/email-validator</item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                        <item name="customer-email" xsi:type="array">
-                                                            <item name="component" xsi:type="string">Magento_Checkout/js/view/form/element/email</item>
-                                                            <item name="displayArea" xsi:type="string">customer-email</item>
-                                                            <item name="tooltip" xsi:type="array">
-                                                                <item name="description" xsi:type="string" translate="true">We'll send your order confirmation here.</item>
-                                                            </item>
-                                                            <item name="children" xsi:type="array">
-                                                                <item name="before-login-form" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">uiComponent</item>
-                                                                    <item name="displayArea" xsi:type="string">before-login-form</item>
-                                                                    <item name="children" xsi:type="array">
-                                                                        <!-- before login form fields -->
-                                                                    </item>
-                                                                </item>
-                                                                <item name="additional-login-form-fields" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">uiComponent</item>
-                                                                    <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
-                                                                    <item name="children" xsi:type="array">
-                                                                        <!-- additional login form fields -->
-                                                                    </item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                        <item name="beforeMethods" xsi:type="array">
-                                                            <item name="component" xsi:type="string">uiComponent</item>
-                                                            <item name="displayArea" xsi:type="string">beforeMethods</item>
-                                                            <item name="children" xsi:type="array">
-                                                                <!-- merge additional data before payment methods here -->
-                                                            </item>
-                                                            <item name="validation" xsi:type="array">
-                                                                <item name="validate-select" xsi:type="string">true</item>
-                                                            </item>
-                                                            <!-- Value of region_id field is filtered by the value of county_id attribute -->
-                                                            <item name="filterBy" xsi:type="array">
-                                                                <item name="target" xsi:type="string">${ $.provider }:${ $.parentScope }.country_id</item>
-                                                                <item name="field" xsi:type="string">country_id</item>
-                                                            </item>
-
-                                                            <item name="region" xsi:type="array">
-                                                                <!-- Make region attribute invisible on frontend. Corresponding input element is created by region_id field -->
-                                                                <item name="visible" xsi:type="boolean">false</item>
-                                                            </item>
-
-                                                            <item name="region_id" xsi:type="array">
-                                                                <item name="component" xsi:type="string">Eadesigndev_RomCity/js/form/element/region</item>
-                                                                <item name="config" xsi:type="array">
-                                                                    <item name="template" xsi:type="string">ui/form/field</item>
-                                                                    <item name="elementTmpl" xsi:type="string">ui/form/element/select</item>
-                                                                    <item name="customEntry" xsi:type="string">billingAddress.region</item>
-                                                                </item>
-                                                                <item name="validation" xsi:type="array">
-                                                                    <item name="required-entry" xsi:type="boolean">true</item>
-                                                                </item>
-                                                                <!-- Value of region_id field is filtered by the value of county_id attribute -->
-                                                                <item name="filterBy" xsi:type="array">
-                                                                    <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.country_id]]></item>
-                                                                    <item name="field" xsi:type="string">country_id</item>
-                                                                </item>
-                                                            </item>
-                                                            <item name="city_id" xsi:type="array">
-
-
-                                                                <item name="component" xsi:type="string">Eadesigndev_RomCity/js/form/element/city</item>
-                                                                <item name="config" xsi:type="array">
-                                                                    <!--customScope is used to group elements within a single form (e.g. they can be validated separately)-->
-                                                                    <item name="customScope" xsi:type="string">customCheckoutForm</item>
-                                                                    <item name="template" xsi:type="string">ui/form/field</item>
-                                                                    <item name="elementTmpl" xsi:type="string">ui/form/element/select</item>
-                                                                </item>
-                                                                <item name="validation" xsi:type="array">
-                                                                    <item name="required-entry" xsi:type="boolean">true</item>
-                                                                </item>
-                                                                <item name="options" xsi:type="array">
-                                                                    <item name="0" xsi:type="array">
-                                                                        <item name="label" xsi:type="string">Please select value</item>
-                                                                        <item name="value" xsi:type="string"></item>
-                                                                    </item>
-                                                                </item>
-                                                                <item name="filterBy" xsi:type="array">
-                                                                    <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.region_id]]></item>
-                                                                    <item name="field" xsi:type="string">region_id</item>
-                                                                </item>
-                                                                <!-- value element allows to specify default value of the form field -->
-                                                                <item name="value" xsi:type="string">value_2</item>
-                                                                <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                <item name="dataScope" xsi:type="string">customCheckoutForm.city_id</item>
-                                                                <item name="label" xsi:type="string">City</item>
-                                                            </item>
-                                                        </item>
-                                                        <item name="payments-list" xsi:type="array">
-                                                            <item name="component" xsi:type="string">Magento_Checkout/js/view/payment/list</item>
-                                                            <item name="displayArea" xsi:type="string">payment-methods-list</item>
-                                                            <item name="config" xsi:type="array">
-                                                                <item name="deps" xsi:type="array">
-                                                                    <item name="0" xsi:type="string">checkout.steps.billing-step.payment.renders</item>
-                                                                    <item name="1" xsi:type="string">checkout.steps.billing-step.payment.additional-payment-validators</item>
-                                                                </item>
-                                                            </item>
-                                                            <item name="children" xsi:type="array">
-                                                                <item name="before-place-order" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">uiComponent</item>
-                                                                    <item name="displayArea" xsi:type="string">before-place-order</item>
-                                                                    <item name="dataScope" xsi:type="string">before-place-order</item>
-                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                    <item name="config" xsi:type="array">
-                                                                        <item name="template" xsi:type="string">Magento_Checkout/payment/before-place-order</item>
-                                                                    </item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                        <!-- merge your payment methods here -->
-                                                        <item name="afterMethods" xsi:type="array">
-                                                            <item name="component" xsi:type="string">uiComponent</item>
-                                                            <item name="displayArea" xsi:type="string">afterMethods</item>
-                                                            <item name="children" xsi:type="array">
-                                                                <!-- merge additional data after payment methods here -->
                                                             </item>
                                                         </item>
                                                     </item>
@@ -253,7 +53,6 @@
                     </item>
                 </argument>
             </arguments>
-            </referenceBlock>
-        </referenceContainer>
+        </referenceBlock>
     </body>
 </page>

@@ -8,17 +8,16 @@ namespace Eadesigndev\RomCity\Api\Data;
 
 interface RomCityInterface
 {
-    const ENTITY_ID         = 'entity_id';
-    const REGION_ID         = 'region_id';
-    const CITY_NAME         = 'city';
-    
-    
+    public const ENTITY_ID = 'entity_id';
+    public const REGION_ID = 'region_id';
+    public const CITY_NAME = 'city';
+
+
     public function getEntityId();
 
     public function getRegionId();
 
     public function getCityName();
-
 
     public function setEntityId($entityId);
 

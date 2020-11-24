@@ -1,14 +1,14 @@
 <?php
 
-namespace Eadesigndev\RomCity\Block\Checkout;
+declare(strict_types=1);
 
-use Eadesigndev\RomCity\Model\RomCityRepository;
-use Eadesigndev\RomCity\Model\RomCity;
+namespace Eadesigndev\RomCity\Model;
+
+use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Serialize\SerializerInterface;
-use Magento\Framework\View\Element\Template;
 
-class Cities extends Template
+class Cities implements ConfigProviderInterface
 {
     /** @var RomCityRepository  */
     private $romCityRepository;
@@ -20,22 +20,24 @@ class Cities extends Template
     private $serializer;
 
     public function __construct(
-        Template\Context $context,
         RomCityRepository $romCityRepository,
         SearchCriteriaBuilder $searchCriteria,
-        SerializerInterface $serializer,
-        array $data = []
-    )
-    {
-        $this->searchCriteria = $searchCriteria;
+        SerializerInterface $serializer
+    ) {
         $this->romCityRepository = $romCityRepository;
+        $this->searchCriteria = $searchCriteria;
         $this->serializer = $serializer;
-        parent::__construct($context, $data);
     }
 
-    public function citiesJson()
+    public function getConfig(): array
     {
+        return [
+            'cities' => $this->getCities()
+        ];
+    }
 
+    private function getCities(): string
+    {
         $searchCriteriaBuilder = $this->searchCriteria;
         $searchCriteria = $searchCriteriaBuilder->create();
 
@@ -46,7 +48,7 @@ class Cities extends Template
 
         /** @var RomCity $item */
         foreach ($items as $item) {
-            $return[] = ['region_id' => $item->getRegionId(), 'city_name' => $item->getCityName()];
+            $return[$item->getRegionId()][] = $item->getCityName();
         }
 
         return $this->serializer->serialize($return);

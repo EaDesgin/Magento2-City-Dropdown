@@ -1,99 +1,61 @@
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 /**
  * @api
  */
 define([
-    'underscore',
-    'uiRegistry',
-    'Magento_Ui/js/form/element/select',
-    'Magento_Checkout/js/model/default-post-code-resolver',
-    'jquery',
-    'mage/utils/wrapper',
-    'mage/template',
-    'mage/validation',
-    'underscore',
     'Magento_Ui/js/form/element/abstract',
-    'jquery/ui'
-], function (_, registry, Select, defaultPostCodeResolver, $) {
+    'Magento_Ui/js/lib/validation/validator'
+], function (Element, validator) {
     'use strict';
 
-    return Select.extend({
+    return Element.extend({
         defaults: {
-            skipValidation: false,
             imports: {
-                update: '${ $.parentName }.region_id:value'
-            }
+                updateCitySelect: '${ $.parentName }.city_id:value'
+            },
+            options: []
         },
 
         /**
-         * @param {String} value
+         * Validates itself by it's validation rules using validator object.
+         * If validation of a rule did not pass, writes it's message to
+         * 'error' observable property.
+         *
+         * @returns {Object} Validate information.
          */
-        update: function (value) {
-            var string = JSON.stringify($eaCitiesJson),
-                obj = JSON.parse(string),
-                romania = obj.RO,
-                romanianRegions,
-                parentCity,
-                currentRegionCities;
+        validate: function () {
+            var value = this.value(),
+                result = validator(this.validation, value, this.validationParams),
+                message =  result.message,
+                isValid = this.disabled() || result.passed;
 
-            romanianRegions = romania[value];
+            this.error(message);
+            this.error.valueHasMutated();
+            this.bubble('error', message);
 
-            if(romanianRegions === undefined){
-
-                this.hide();
-
-                return romanianRegions;
+            if (this.source && !isValid) {
+                this.source.set('params.invalid', true);
             }
 
-            parentCity = $("[name ='shippingAddress.city']");
-
-            currentRegionCities = romanianRegions.cities;
-
-            var cityOptions = [];
-
-            var jsonObject = {
-                value: '',
-                title: 'Selectati localitatea',
-                country_id: "",
-                label: 'Selectati localitatea'
+            return {
+                valid: isValid,
+                target: this
             };
-            cityOptions.push(jsonObject);
+        },
 
-            $.each(currentRegionCities, function (index, cityOptionValue) {
+        /**
+         *
+         * @param {string} cityName
+         */
+        updateCitySelect: function (cityName) {
 
-                var name = cityOptionValue.name;
-
-                var jsonObject = {
-                    value: index,
-                    title: name,
-                    country_id: "",
-                    label: name
-                };
-
-                cityOptions.push(jsonObject);
-            });
-
-            this.setOptions(cityOptions);
-
-            var getCity = this.parentName + '.' + 'city',
-                city = registry.get(getCity),
-                cases = cityOptions.length;
-
-            if (cases === 0) {
-                city.show();
-                this.hide();
-                parentCity.show();
-            } else {
-                city.hide();
-
-                this.show();
-                parentCity.hide();
+            if (cityName || cityName === '') {
+                this.visible(false);
+                this.value(cityName)
+                return;
             }
-        }
+
+            this.visible(true);
+        },
     });
 });
-
