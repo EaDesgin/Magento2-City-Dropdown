@@ -24,7 +24,7 @@ define([
                     }
                 });
                 var city = $("[name*='city']"),
-                    selectCity = city.replaceWith("<select class='required-entry' name='city' id='city'>") + '</select>',
+                    selectCity = city.replaceWith("<select class='required-entry select admin__control-select' name='city' id='city'>") + '</select>',
                     htmlSelect = '<option>Selectati localitatea</option>',
                     options;
 
@@ -57,7 +57,7 @@ define([
                     }
                 });
                 var city = $("[name*='" + cityInputName + "']"),
-                    selectCity = city.replaceWith("<select class='required-entry' name='"+cityInputName+"' id='city'>") + '</select>',
+                    selectCity = city.replaceWith("<select class='required-entry select admin__control-select' name='"+cityInputName+"' id='city'>") + '</select>',
                     htmlSelect = '<option>Selectati localitatea</option>',
                     options;
 
