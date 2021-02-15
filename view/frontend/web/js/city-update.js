@@ -29,7 +29,6 @@ define([
                     options;
 
                 $.each(region, function (index, value) {
-                    console.log(value+' - '+cityInput);
                     if ( value == cityInput.toUpperCase()) {
                         options = '<option value="' + value + '" selected>' + value + '</option>';
                     } else {

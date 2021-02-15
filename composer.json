@@ -2,7 +2,7 @@
     "name": "eadesignro/romcity",
     "description": "A module that adds checkout city field to checkout quote shipping address",
     "type": "magento2-module",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "autoload": {
         "files": [
             "registration.php"
