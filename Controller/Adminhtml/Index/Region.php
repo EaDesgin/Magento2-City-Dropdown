@@ -17,7 +17,7 @@ class Region extends Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Eadesigndev_RomCity::romcity';
+    const ADMIN_RESOURCE = 'Eadesigndev_RomCity::region_list';
 
     protected $resultPageFactory;
 

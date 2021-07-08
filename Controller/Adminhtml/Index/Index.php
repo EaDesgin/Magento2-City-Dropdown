@@ -17,7 +17,7 @@ class Index extends Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Eadesigndev_RomCity::romcity';
+    const ADMIN_RESOURCE = 'Eadesigndev_RomCity::romcity_list';
 
     private $resultPageFactory;
 

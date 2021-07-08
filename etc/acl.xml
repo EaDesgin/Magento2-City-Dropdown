@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::eadesign" title="EaDesign EaCore">
+					<resource id="Eadesigndev_RomCity::romcity" title="RomCity">
+						<resource id="Eadesigndev_RomCity::romcity_list" title="Manage City List" sortOrder="10" />
+						<resource id="Eadesigndev_RomCity::region_list" title="Manage Region List" sortOrder="20" />
+					</resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>
