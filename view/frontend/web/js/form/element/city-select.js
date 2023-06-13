@@ -50,7 +50,7 @@ define([
             }
 
             if (options && options.length) {
-                options = [{title: "", value: "", label: "Selectati localitatea"}].concat(options);
+                options = [{title: "", value: "", label: "Selectați orașul"}].concat(options);
                 this.visible(true);
 
                 cityValue = registry.get(this.imports.city).value();

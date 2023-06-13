@@ -15,6 +15,7 @@ define([
 
         $(document).ready(function (){
             var region_id = $("[name*='region_id']").val();
+            console.log("region_id:", region_id);
             var region = [];
 
             if (region_id) {
@@ -25,7 +26,7 @@ define([
                 });
                 var city = $("[name*='city']"),
                     selectCity = city.replaceWith("<select class='required-entry' name='city' id='city'>") + '</select>',
-                    htmlSelect = '<option>Selectati localitatea</option>',
+                    htmlSelect = '<option>Selectați orașul</option>',
                     options;
 
                 $.each(region, function (index, value) {
@@ -58,7 +59,7 @@ define([
                 });
                 var city = $("[name*='" + cityInputName + "']"),
                     selectCity = city.replaceWith("<select class='required-entry' name='"+cityInputName+"' id='city'>") + '</select>',
-                    htmlSelect = '<option>Selectati localitatea</option>',
+                    htmlSelect = '<option>Selectați orașul</option>',
                     options;
 
                 $.each(region, function (index, value) {
