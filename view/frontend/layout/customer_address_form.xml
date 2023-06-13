@@ -5,7 +5,7 @@
     <body>
 
         <referenceContainer name="content">
-            <block class="Eadesigndev\RomCity\Block\Checkout\Cities" name="ity-updater" template="Eadesigndev_RomCity::city-updater.phtml">
+            <block class="Eadesigndev\RomCity\Block\Checkout\Cities" name="city-updater" template="Eadesigndev_RomCity::city-updater.phtml">
             </block>
         </referenceContainer>
     </body>

@@ -83,19 +83,22 @@ class CitiesJsonRomCity extends Data
             }
 
             $cities = [];
-            foreach ($citiesData as $cityId => $cityData) {
-                $entityId = $cityData->getRegionId();
-                $regionId = $region->getId();
-                if ($entityId == $regionId) {
-                    $id       = $cityData->getId();
-                    $cityName = $cityData->getCityName();
-                    $cities[$id] = [
-                        'name' => $cityName,
-                        'id' => $cityId
-                    ];
+            if($region->getCountryId() == "RO")
+            {
+                foreach ($citiesData as $cityId => $cityData) {
+                    $entityId = $cityData->getRegionId();
+                    $regionId = $region->getId();
+                    if ($entityId == $regionId) {
+                        $id       = $cityData->getId();
+                        $cityName = $cityData->getCityName();
+                        $cities[$id] = [
+                            'name' => $cityName,
+                            'id' => $cityId
+                        ];
+                    }
                 }
             }
-
+            
             $regions[$region->getCountryId()][$region->getRegionId()] = [
                 'code' => $region->getCode(),
                 'name' => (string)__($region->getName()),
